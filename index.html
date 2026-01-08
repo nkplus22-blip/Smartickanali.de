@@ -1,25 +1,212 @@
 <!DOCTYPE html>
 <html lang="bs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SmarticKanali TV</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    /* --- DODATNE PROMJENE ZA CRVENO–BIJELI DIZAJN --- */
-    body { background:#fff; color:#c00; }
-    header, .overlay { background:#c00; color:#fff; }
-    .overlay a { color:#fff; }
-    .overlay a:hover { color:#ffdddd; }
-    h1, h2, p, a { color:#c00; }
-    button, .menu-toggle {
-      background:#c00; color:#fff; border:none; padding:10px 20px;
-    }
-    button:hover, .menu-toggle:hover { background:#a00; }
-    footer { background:#c00; color:#fff; }
-    footer a { color:#fff; text-decoration:underline; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SmarticKanali TV | Najbolji IPTV servis</title>
+
+<meta name="description" content="SmarticKanali TV – preko 2100 live kanala, 75.000+ filmova i serija. Stabilan IPTV servis već 9 godina.">
+<meta name="keywords" content="IPTV, SmarticKanali, IPTV Balkan, TV kanali, IPTV BiH">
+<meta name="author" content="SmarticKanali TV">
+
+<style>
+:root{
+  --red:#c00000;
+  --dark:#900000;
+  --light:#ffffff;
+  --bg:#f4f4f4;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif;}
+
+body{
+  background:var(--bg);
+  color:#333;
+  overflow-x:hidden;
+}
+
+canvas#tech-bg{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+}
+
+/* HEADER */
+header{
+  background:linear-gradient(135deg,var(--red),var(--dark));
+  color:#fff;
+  padding:28px 20px;
+  text-align:center;
+  position:relative;
+}
+
+header h1{font-size:30px;margin-bottom:6px;}
+header p{opacity:.9}
+
+.menu-toggle{
+  position:absolute;
+  top:20px;
+  right:20px;
+  background:#fff;
+  color:var(--red);
+  border:none;
+  padding:8px 14px;
+  border-radius:6px;
+  font-size:20px;
+}
+
+/* MENU */
+.overlay{
+  height:100%;
+  width:0;
+  position:fixed;
+  z-index:10;
+  top:0;left:0;
+  background:rgba(192,0,0,.97);
+  overflow-x:hidden;
+  transition:.4s;
+  padding-top:60px;
+  text-align:center;
+}
+
+.overlay a{
+  display:block;
+  color:#fff;
+  padding:12px;
+  font-size:22px;
+  text-decoration:none;
+}
+
+.overlay a:hover{background:rgba(255,255,255,.15);}
+.closebtn{
+  position:absolute;
+  top:15px;
+  right:25px;
+  font-size:40px;
+}
+
+/* HERO */
+.hero{
+  background:#fff;
+  max-width:1100px;
+  margin:40px auto;
+  padding:45px 25px;
+  text-align:center;
+  border-radius:18px;
+  box-shadow:0 12px 35px rgba(0,0,0,.12);
+}
+
+.hero h1{color:var(--red);font-size:34px;margin-bottom:15px;}
+.hero p{font-size:18px;margin-bottom:25px;}
+
+.btn{
+  display:inline-block;
+  background:var(--red);
+  color:#fff;
+  padding:14px 32px;
+  border-radius:30px;
+  font-weight:bold;
+  text-decoration:none;
+}
+.btn:hover{background:var(--dark);}
+
+/* TRUST */
+.trust{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:20px;
+  margin-top:30px;
+}
+.trust div{
+  background:#f9f9f9;
+  padding:12px 20px;
+  border-radius:30px;
+  font-weight:bold;
+  color:var(--red);
+}
+
+/* COUNTERS */
+.counters{
+  max-width:1100px;
+  margin:0 auto 40px;
+  padding:0 20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+}
+
+.counter-box{
+  background:#fff;
+  padding:30px;
+  text-align:center;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.1);
+}
+
+.counter-box h2{font-size:34px;color:var(--red);}
+
+/* CONTENT */
+.content{
+  max-width:1100px;
+  margin:0 auto 40px;
+  background:#fff;
+  padding:40px 25px;
+  border-radius:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.1);
+}
+
+.content h2{color:var(--red);margin-bottom:15px;}
+.content ul{margin-left:20px;margin-bottom:20px;}
+.content li{margin-bottom:8px;}
+
+/* STEPS */
+.steps{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+  margin-top:25px;
+}
+.step{
+  background:#f9f9f9;
+  padding:25px;
+  border-radius:16px;
+  text-align:center;
+}
+.step h3{color:var(--red);margin-bottom:8px;}
+
+/* FOOTER */
+footer{
+  background:linear-gradient(135deg,var(--dark),var(--red));
+  color:#fff;
+  text-align:center;
+  padding:30px 20px;
+}
+footer a{color:#fff;text-decoration:underline;}
+
+/* WHATSAPP */
+.whatsapp{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  color:#fff;
+  padding:14px 18px;
+  border-radius:50px;
+  text-decoration:none;
+  font-weight:bold;
+  box-shadow:0 5px 15px rgba(0,0,0,.3);
+  z-index:20;
+}
+
+@media(max-width:600px){
+  header h1{font-size:24px;}
+  .hero h1{font-size:26px;}
+}
+</style>
 </head>
+
 <body>
 
 <canvas id="tech-bg"></canvas>
@@ -41,13 +228,20 @@
   <a href="kontakt.html">Kontakt</a>
   <a href="placanje.html">Plaćanje</a>
   <a href="kako-da-gledas.html">Kako da gledaš</a>
-  <a href="aplikacije.html">Aplikacije za korištenje</a>
+  <a href="aplikacije.html">Aplikacije</a>
 </div>
 
 <section class="hero">
   <h1>Dobrodošli u SmarticKanali TV</h1>
-  <p>Već 9 godina pružamo vrhunsku IPTV uslugu bez prekida i trzanja – za Vas i Vašu porodicu.</p>
-  <a href="https://wa.me/381694007480" class="contact-btn">Kontaktiraj nas na WhatsApp</a>
+  <p>Već 9 godina pružamo stabilan IPTV bez prekida i trzanja.</p>
+  <a class="btn" href="https://wa.me/381694007480">Kontakt WhatsApp</a>
+
+  <div class="trust">
+    <div>✔ 24/7 Podrška</div>
+    <div>✔ Bez ugovora</div>
+    <div>✔ Test dostupan</div>
+    <div>✔ Radi svuda</div>
+  </div>
 </section>
 
 <section class="counters">
@@ -58,80 +252,47 @@
 </section>
 
 <section class="content">
-  <h2>Zašto odabrati SmarticKanali TV?</h2>
-  <p>Naš IPTV servis nudi savršen spoj kvaliteta, stabilnosti i povoljne cijene. Vaše zadovoljstvo nam je uvijek na prvom mjestu!</p>
-  <p>📌 Provjerite <a href="cjenovnik.html">pakete i akcije</a>, <a href="top15.html">Top 15 filmova i serija</a> ili <a href="komentari.html">komentare</a>.</p>
-  <a href="https://wa.me/381694007480" class="contact-btn">Kupi / Kontakt WhatsApp</a>
+  <h2>Kako kupiti IPTV?</h2>
+  <div class="steps">
+    <div class="step"><h3>1. Kontakt</h3><p>Javite nam se na WhatsApp</p></div>
+    <div class="step"><h3>2. Aktivacija</h3><p>Dobijate podatke u par minuta</p></div>
+    <div class="step"><h3>3. Gledanje</h3><p>Uživajte bez prekida</p></div>
+  </div>
 </section>
 
 <section class="content">
-  <h2>Šta je Internet televizija (IPTV)?</h2>
+  <h2>Šta je IPTV?</h2>
   <ul>
-    <li>Više hiljada TV kanala iz cijelog svijeta</li>
-    <li>Velika videoteka sa filmovima i serijama na zahtjev</li>
-    <li>Gledanje na Smart TV-u, mobitelu, tabletu, računaru ili TV box uređajima</li>
-    <li>Bez dodatnih antena, kablova ili komplikovanih instalacija</li>
-    <li>Povoljnija cijena u poređenju sa klasičnim operaterima</li>
+    <li>Hiljade kanala iz cijelog svijeta</li>
+    <li>Filmovi i serije na zahtjev</li>
+    <li>Smart TV, telefon, tablet, PC</li>
+    <li>Bez instalacija i kablova</li>
   </ul>
-  <a href="https://wa.me/381694007480" class="contact-btn">Naruči putem WhatsApp-a</a>
+  <a class="btn" href="https://wa.me/381694007480">Naruči odmah</a>
 </section>
 
 <footer>
-  <p>&copy; 2025 SmarticKanali TV | Kontakt: 
-    <a href="https://wa.me/381694007480">WhatsApp +381 69 4007480</a>
-  </p>
+  <p>&copy; 2026 SmarticKanali TV |
+  <a href="https://wa.me/381694007480">WhatsApp +381 69 4007480</a></p>
 </footer>
 
-<script>
-function openNav(){ document.getElementById("myNav").style.width="100%"; }
-function closeNav(){ document.getElementById("myNav").style.width="0%"; }
+<a class="whatsapp" href="https://wa.me/381694007480">💬 WhatsApp</a>
 
-// Brojači
-const counters=document.querySelectorAll('.counter');
-counters.forEach(counter=>{
-  counter.innerText='0';
-  const update=()=>{
-    const target=+counter.getAttribute('data-target');
-    const current=+counter.innerText.replace(/\D/g,'');
-    const inc=target/200;
-    if(current<target){
-      counter.innerText=Math.ceil(current+inc).toLocaleString();
-      setTimeout(update,20);
-    } else {
-      counter.innerText=target>=1000?target.toLocaleString()+"+":target+"+";
-    }
-  };
-  update();
+<script>
+function openNav(){myNav.style.width="100%";}
+function closeNav(){myNav.style.width="0";}
+
+document.querySelectorAll('.counter').forEach(c=>{
+ let t=+c.dataset.target,i=0;
+ let s=setInterval(()=>{i+=Math.ceil(t/120);c.textContent=i>=t?t+"+":i.toLocaleString();if(i>=t)clearInterval(s)},20);
 });
 
-// Canvas efekat ostaje isti (plave linije možeš u CSS promijeniti u crveno ako želiš)
-const canvas=document.getElementById('tech-bg');
-const ctx=canvas.getContext('2d');
-let width=canvas.width=window.innerWidth;
-let height=canvas.height=window.innerHeight;
-window.addEventListener('resize',()=>{ width=canvas.width=window.innerWidth; height=canvas.height=window.innerHeight; });
-
-const particleCount=80;
-const particles=[];
-const icons=[];
-const iconUrls=['https://cdn-icons-png.flaticon.com/32/1087/1087863.png','https://cdn-icons-png.flaticon.com/32/4140/4140048.png','https://cdn-icons-png.flaticon.com/32/715/715676.png'];
-const iconImgs=iconUrls.map(src=>{ const i=new Image(); i.src=src; return i; });
-
-class Particle{ constructor(){ this.x=Math.random()*width; this.y=Math.random()*height; this.size=Math.random()*2+1; this.speedX=Math.random()*1-0.5; this.speedY=Math.random()*1-0.5; } update(){ this.x+=this.speedX; this.y+=this.speedY; if(this.x>width)this.x=0; if(this.x<0)this.x=width; if(this.y>height)this.y=0; if(this.y<0)this.y=height; } draw(){ ctx.fillStyle='rgba(255,0,0,0.7)'; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); } }
-class Icon{ constructor(img){ this.img=img; this.x=Math.random()*width; this.y=Math.random()*height; this.size=32+Math.random()*16; this.speedX=Math.random()*1-0.5; this.speedY=Math.random()*1-0.5; } update(){ this.x+=this.speedX; this.y+=this.speedY; if(this.x>width)this.x=0; if(this.x<0)this.x=width; if(this.y>height)this.y=0; if(this.y<0)this.y=height; } draw(){ ctx.drawImage(this.img,this.x,this.y,this.size,this.size); } }
-
-for(let i=0;i<particleCount;i++)particles.push(new Particle());
-for(let i=0;i<20;i++)icons.push(new Icon(iconImgs[Math.floor(Math.random()*iconImgs.length)]));
-
-function animate(){ ctx.clearRect(0,0,width,height); particles.forEach(p=>{p.update();p.draw();});
-  for(let i=0;i<particles.length;i++){for(let j=i+1;j<particles.length;j++){
-    let dx=particles[i].x-particles[j].x; let dy=particles[i].y-particles[j].y; let dist=Math.sqrt(dx*dx+dy*dy);
-    if(dist<100){ ctx.strokeStyle='rgba(255,0,0,0.1)'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.stroke(); }
-  }}
-  icons.forEach(ic=>{ic.update();ic.draw();});
-  requestAnimationFrame(animate);
-}
-animate();
+// CANVAS
+const canvas=document.getElementById('tech-bg'),ctx=canvas.getContext('2d');
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
+resize();addEventListener('resize',resize);
+let p=[];for(let i=0;i<80;i++)p.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:Math.random()-.5,vy:Math.random()-.5});
+(function a(){ctx.clearRect(0,0,canvas.width,canvas.height);p.forEach(e=>{e.x+=e.vx;e.y+=e.vy;if(e.x<0||e.x>canvas.width)e.vx*=-1;if(e.y<0||e.y>canvas.height)e.vy*=-1;ctx.fillStyle="rgba(255,0,0,.6)";ctx.beginPath();ctx.arc(e.x,e.y,2,0,6.28);ctx.fill();});requestAnimationFrame(a)})();
 </script>
 
 </body>
