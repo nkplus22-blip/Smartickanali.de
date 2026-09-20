@@ -3,149 +3,1364 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Komentari - SmarticKanalk TV</title>
+  <title>Komentari Korisnika | SmarticKanali</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #fff;
-      color: #222;
+    :root {
+      --primary: #dc2626;
+      --primary-dark: #991b1b;
+      --primary-light: #fee2e2;
+      --bg-color: #fff0f0;
+      --card-bg: #ffffff;
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --border-color: #fecaca;
+      --shadow-sm: 0 2px 4px rgba(220, 38, 38, 0.05);
+      --shadow-md: 0 10px 25px -5px rgba(220, 38, 38, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 20px 30px -10px rgba(220, 38, 38, 0.2);
+      --radius: 18px;
     }
-    header {
-      background: #b30000;           /* crvena traka */
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-      position: relative;
-    }
-    h1 { margin: 0; }
 
-    /* Hamburger meni */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+      background: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* HEADER & NAVIGATION */
+    header {
+      background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+      color: #fff;
+      padding: 22px 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      box-shadow: 0 4px 20px rgba(153, 27, 27, 0.3);
+    }
+
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin: 0;
+      display: inline-block;
+    }
+
     .menu-toggle {
       position: absolute;
-      top: 20px;
-      left: 20px;
-      font-size: 28px;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      font-size: 26px;
       cursor: pointer;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       color: #fff;
-      background: none;
-      border: none;
-    }
-    nav {
-      display: none;
-      flex-direction: column;
-      background: #e60000;          /* svjetlija crvena za meni */
-      position: absolute;
-      top: 60px;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      padding: 12px 20px;
-      border-bottom: 1px solid #b30000;
-    }
-    nav a:hover {
-      background: #cc0000;
-    }
-    .show-menu {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
       display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .container {
-      max-width: 900px;
-      margin: 30px auto;
+    .menu-toggle:hover {
+      background: rgba(255, 255, 255, 0.35);
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .overlay {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      background-color: rgba(153, 27, 27, 0.98);
+      backdrop-filter: blur(12px);
+      overflow-x: hidden;
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      padding-top: 70px;
+    }
+
+    .overlay-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 480px;
+      margin: 0 auto;
       padding: 0 20px;
     }
-    .comment {
-      background: #fff;
-      border-left: 4px solid #b30000;
-      padding: 15px 20px;
+
+    .overlay a {
+      display: block;
+      text-decoration: none;
+      font-size: 1.25em;
+      font-weight: 700;
+      color: #fff;
+      padding: 14px 24px;
+      margin: 5px 0;
+      width: 100%;
+      border-radius: 14px;
+      text-align: center;
+      transition: all 0.25s ease;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .overlay a:hover {
+      background: #ffffff;
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    }
+
+    .overlay .closebtn {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 38px;
+      color: #fff;
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: auto;
+      padding: 0;
+      line-height: 1;
+    }
+
+    /* HERO BANNER & SEARCH */
+    .hero-banner {
+      background: linear-gradient(180deg, #fde8e8 0%, var(--bg-color) 100%);
+      padding: 45px 20px 25px 20px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 6px 16px;
+      border-radius: 30px;
       margin-bottom: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      border: 1px solid var(--border-color);
     }
-    .comment strong {
-      color: #b30000;
+
+    .hero-banner h2 {
+      color: var(--primary-dark);
+      font-size: 2.3rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
     }
+
+    .hero-banner p {
+      font-size: 1.1rem;
+      color: #4b5563;
+      max-width: 680px;
+      margin: 0 auto 25px auto;
+    }
+
+    .search-box {
+      max-width: 500px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 16px 22px 16px 50px;
+      font-size: 1rem;
+      border-radius: 30px;
+      border: 2px solid var(--border-color);
+      outline: none;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    .search-box input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      color: var(--primary);
+      pointer-events: none;
+    }
+
+    /* MAIN CONTENT AREA */
+    .content {
+      max-width: 1020px;
+      margin: 35px auto;
+      padding: 0 20px;
+    }
+
+    /* RATING SUMMARY DASHBOARD */
+    .rating-summary {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      margin-bottom: 35px;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .rating-score {
+      text-align: center;
+      padding-right: 30px;
+      border-right: 1px dashed var(--border-color);
+    }
+
+    .rating-number {
+      font-size: 3.8rem;
+      font-weight: 900;
+      color: var(--primary-dark);
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+
+    .stars-outer {
+      color: #f59e0b;
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+    }
+
+    .total-reviews {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .rating-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .bar-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #374151;
+    }
+
+    .bar-item span {
+      width: 60px;
+    }
+
+    .bar-bg {
+      flex: 1;
+      height: 10px;
+      background: #fee2e2;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #dc2626 0%, #ef4444 100%);
+      border-radius: 10px;
+    }
+
+    .bar-percent {
+      width: 40px;
+      text-align: right;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* ADD COMMENT FORM */
+    .add-comment-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      margin-bottom: 35px;
+    }
+
+    .add-comment-card h3 {
+      color: var(--primary-dark);
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .add-comment-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #374151;
+    }
+
+    .form-group input, .form-group textarea, .form-group select {
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border-color);
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      transition: all 0.25s ease;
+      background: #fffafa;
+    }
+
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      border-color: var(--primary);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+      color: #fff;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(153, 27, 27, 0.25);
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(153, 27, 27, 0.35);
+    }
+
+    /* COMMENTS LIST GRID */
+    .comments-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .comment-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .comment-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+      border-color: var(--primary);
+    }
+
+    .comment-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 3px 8px rgba(220, 38, 38, 0.25);
+    }
+
+    .user-info h4 {
+      color: var(--text-main);
+      font-size: 1.05rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .verified-tag {
+      font-size: 0.75rem;
+      color: #059669;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      margin-top: 2px;
+    }
+
+    .stars {
+      color: #f59e0b;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+
+    .comment-body {
+      color: #374151;
+      font-size: 0.98rem;
+      line-height: 1.55;
+      flex-grow: 1;
+    }
+
+    .comment-footer {
+      margin-top: 15px;
+      padding-top: 10px;
+      border-top: 1px dashed #fee2e2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .no-results {
+      display: none;
+      text-align: center;
+      padding: 40px;
+      background: #fff;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      grid-column: 1 / -1;
+    }
+
+    /* CTA BOX */
+    .cta-box {
+      background: linear-gradient(135deg, #dc2626 0%, #881337 100%);
+      color: #fff;
+      padding: 40px 25px;
+      border-radius: var(--radius);
+      text-align: center;
+      margin-top: 50px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-box h3 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .cta-box p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #ffffff;
+      color: var(--primary-dark);
+      padding: 16px 36px;
+      border-radius: 35px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.05rem;
+      margin-top: 22px;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+
+    .cta-btn:hover {
+      background: #ffe6e6;
+      transform: scale(1.04) translateY(-2px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+    }
+
+    /* FOOTER */
     footer {
-      background: #b30000;
+      background: var(--primary-dark);
       color: #fff;
       text-align: center;
-      padding: 15px;
-      margin-top: 40px;
+      padding: 28px 20px;
+      margin-top: 60px;
+      font-size: 0.95rem;
+      border-top: 4px solid var(--primary);
     }
+
     footer a {
-      color: #fff;
+      color: #fecaca;
+      text-decoration: none;
+      font-weight: 700;
+      transition: color 0.2s ease;
+    }
+
+    footer a:hover {
+      color: #ffffff;
       text-decoration: underline;
     }
-    footer a:hover {
-      color: #ffdddd;
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      header h1 { font-size: 1.4rem; }
+      .hero-banner h2 { font-size: 1.8rem; }
+      .rating-summary { grid-template-columns: 1fr; gap: 20px; text-align: center; }
+      .rating-score { padding-right: 0; border-right: none; border-bottom: 1px dashed var(--border-color); padding-bottom: 20px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .cta-box h3 { font-size: 1.4rem; }
     }
   </style>
 </head>
 <body>
+
+  <!-- HEADER -->
   <header>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
     <h1>Komentari naših korisnika</h1>
+    <button class="menu-toggle" onclick="openNav()" aria-label="Otvori navigaciju">☰</button>
   </header>
 
-  <nav id="mainMenu">
-    <a href="index.html">Početna</a>
-    <a href="cjenovnik.html">Cijene i akcije</a>
-    <a href="komentari.html">Komentari</a>
-    <a href="onama.html">O nama</a>
-    <a href="tim.html">Postani dio tima</a>
-    <a href="top15.html">Top 15</a>
-    <a href="kontakt.html">Kontakt</a>
-    <a href="placanje.html">Plaćanje</a>
-  </nav>
-
-  <div class="container">
-    <div class="comment"><strong>Amir:</strong> Odlična usluga, preporučujem svima!</div>
-    <div class="comment"><strong>Jelena:</strong> Brza instalacija i super kvalitet slike.</div>
-    <div class="comment"><strong>Marko:</strong> Sve radi bez ikakvih problema.</div>
-    <div class="comment"><strong>Ivana:</strong> Ljubazna podrška, pomogli su mi odmah.</div>
-    <div class="comment"><strong>Nemanja:</strong> Najbolja IPTV usluga koju sam koristio.</div>
-    <div class="comment"><strong>Lejla:</strong> Cijene su veoma povoljne, a kvalitet odličan.</div>
-    <div class="comment"><strong>Petar:</strong> Preporučujem, mnogo kanala i bez štekanja.</div>
-    <div class="comment"><strong>Maja:</strong> Djeca uživaju u crtićima, hvala vam!</div>
-    <div class="comment"><strong>Armin:</strong> Radi perfektno i na mobitelu i na TV-u.</div>
-    <div class="comment"><strong>Sanja:</strong> Sve pohvale za podršku i kvalitet.</div>
-    <div class="comment"><strong>Dino:</strong> Bolje od svih drugih IPTV provajdera.</div>
-    <div class="comment"><strong>Selma:</strong> Plaćanje jednostavno, sve je sigurno.</div>
-    <div class="comment"><strong>Vlado:</strong> Gledam i sportske kanale bez ikakvih prekida.</div>
-    <div class="comment"><strong>Elma:</strong> Savršeno za cijelu porodicu.</div>
-    <div class="comment"><strong>Dejan:</strong> Stabilna konekcija, nema zastajkivanja.</div>
-    <div class="comment"><strong>Ana:</strong> Brzo sam dobila pristup nakon plaćanja.</div>
-    <div class="comment"><strong>Adnan:</strong> Odlično iskustvo, nastavljam pretplatu.</div>
-    <div class="comment"><strong>Milica:</strong> Sve pohvale, imate moju preporuku.</div>
-    <div class="comment"><strong>Haris:</strong> Radi i na starijem smart TV-u bez problema.</div>
-    <div class="comment"><strong>Nina:</strong> Najbolja odluka, odlična zabava za cijelu kuću.</div>
-    <div class="comment"><strong>Filip:</strong> Super ponuda i mnogo kanala.</div>
-    <div class="comment"><strong>Kristina:</strong> Veoma sam zadovoljna, sve radi glatko.</div>
-    <div class="comment"><strong>Darko:</strong> Dobar kvalitet slike čak i na sporijem internetu.</div>
-    <div class="comment"><strong>Marina:</strong> Moja preporuka, odličan tim.</div>
-    <div class="comment"><strong>Edin:</strong> Instalacija brza i jednostavna.</div>
-    <div class="comment"><strong>Ivona:</strong> Hvala na ljubaznosti i pomoći.</div>
-    <div class="comment"><strong>Goran:</strong> Veoma povoljno i stabilno.</div>
-    <div class="comment"><strong>Sofija:</strong> Preporučujem svima, odlična usluga.</div>
-    <div class="comment"><strong>Damir:</strong> IPTV bez greške, svaka čast!</div>
-    <div class="comment"><strong>Lidija:</strong> Svi kanali rade savršeno, hvala vam.</div>
+  <!-- OVERLAY NAV -->
+  <div id="myNav" class="overlay">
+    <button class="closebtn" onclick="closeNav()" aria-label="Zatvori navigaciju">&times;</button>
+    <div class="overlay-content">
+      <a href="index.html">🏠 Početna</a>
+      <a href="cjenovnik.html">💰 Cijene i akcije</a>
+      <a href="top15.html">🎬 Top 30</a>
+      <a href="komentari.html">💬 Komentari</a>
+      <a href="tim.html">👥 Postani dio tima</a>
+      <a href="onama.html">ℹ️ O nama</a>
+      <a href="kontakt.html">📞 Kontakt</a>
+      <a href="placanje.html">💳 Plaćanje</a>
+      <a href="kako-da-gledas.html">📺 Kako da gledaš</a>
+    </div>
   </div>
 
+  <!-- HERO BANNER -->
+  <section class="hero-banner">
+    <span class="hero-badge">⭐ 100% Zadovoljni Korisnici</span>
+    <h2>Iskustva & Utisci naših Članova</h2>
+    <p>Pogledajte šta hiljade zadovoljnih korisnika misle o SmarticKanali uslugama ili podijelite vaše lično iskustvo sa nama.</p>
+    
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="commentSearch" onkeyup="searchComments()" placeholder="Pretraži komentare (npr. Amir, podrška, slika, kvalitet)...">
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- RATING DASHBOARD -->
+    <div class="rating-summary">
+      <div class="rating-score">
+        <div class="rating-number">4.9</div>
+        <div class="stars-outer">★★★★★</div>
+        <div class="total-reviews">Na osnovu <strong id="totalReviewsCount">30</strong>+ recenzija</div>
+      </div>
+      <div class="rating-bars">
+        <div class="bar-item">
+          <span>5 Zvjezdica</span>
+          <div class="bar-bg"><div class="bar-fill" style="width: 94%;"></div></div>
+          <span class="bar-percent">94%</span>
+        </div>
+        <div class="bar-item">
+          <span>4 Zvjezdice</span>
+          <div class="bar-bg"><div class="bar-fill" style="width: 6%;"></div></div>
+          <span class="bar-percent">6%</span>
+        </div>
+        <div class="bar-item">
+          <span>3 Zvjezdice</span>
+          <div class="bar-bg"><div class="bar-fill" style="width: 0%;"></div></div>
+          <span class="bar-percent">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM TO ADD COMMENT -->
+    <div class="add-comment-card">
+      <h3>✍️ Ostavite Vaš Utisak</h3>
+      <p>Vaše mišljenje nam pomaže da budemo još bolji!</p>
+      
+      <form id="commentForm" onsubmit="submitComment(event)">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="userName">Vaše Ime ili Nadimak:</label>
+            <input type="text" id="userName" required placeholder="npr. Nermin K.">
+          </div>
+          <div class="form-group">
+            <label for="userRating">Ocjena:</label>
+            <select id="userRating">
+              <option value="5">⭐⭐⭐⭐⭐ (5/5) - Odlično</option>
+              <option value="4">⭐⭐⭐⭐ (4/5) - Vrlo dobro</option>
+              <option value="3">⭐⭐⭐ (3/5) - Dobro</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom: 20px;">
+          <label for="userComment">Vaš Komentar:</label>
+          <textarea id="userComment" required placeholder="Napišite vaše iskustvo sa SmarticKanalima..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">🚀 Objavi Komentar</button>
+      </form>
+    </div>
+
+    <!-- COMMENTS GRID -->
+    <div class="comments-grid" id="commentsGrid">
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">A</div>
+            <div class="user-info">
+              <h4>Amir</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Odlična usluga, preporučujem svima!</div>
+        </div>
+        <div class="comment-footer">
+          <span>SmarticKanali Paket</span>
+          <span>Preporuka</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">J</div>
+            <div class="user-info">
+              <h4>Jelena</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Brza instalacija i super kvalitet slike.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Smart TV</span>
+          <span>Full HD / 4K</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">M</div>
+            <div class="user-info">
+              <h4>Marko</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Sve radi bez ikakvih problema.</div>
+        </div>
+        <div class="comment-footer">
+          <span>FireStick</span>
+          <span>Stabilan strim</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">I</div>
+            <div class="user-info">
+              <h4>Ivana</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Ljubazna podrška, pomogli su mi odmah.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Korisnička podrška</span>
+          <span>WhatsApp 24/7</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">N</div>
+            <div class="user-info">
+              <h4>Nemanja</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Najbolja IPTV usluga koju sam koristio.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Godišnja pretplata</span>
+          <span>Top Izbor</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">L</div>
+            <div class="user-info">
+              <h4>Lejla</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Cijene su veoma povoljne, a kvalitet odličan.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Povoljne cijene</span>
+          <span>Super kvalitet</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">P</div>
+            <div class="user-info">
+              <h4>Petar</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Preporučujem, mnogo kanala i bez štekanja.</div>
+        </div>
+        <div class="comment-footer">
+          <span>10.000+ Kanala</span>
+          <span>Bez seckanja</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">M</div>
+            <div class="user-info">
+              <h4>Maja</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Djeca uživaju u crtićima, hvala vam!</div>
+        </div>
+        <div class="comment-footer">
+          <span>Dječiji kanali</span>
+          <span>Porodični paket</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">A</div>
+            <div class="user-info">
+              <h4>Armin</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Radi perfektno i na mobitelu i na TV-u.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Više uređaja</span>
+          <span>Android / iOS</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">S</div>
+            <div class="user-info">
+              <h4>Sanja</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Sve pohvale za podršku i kvalitet.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Kvalitet 10/10</span>
+          <span>Korisnik</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">D</div>
+            <div class="user-info">
+              <h4>Dino</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Bolje od svih drugih IPTV provajdera.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Brza konekcija</span>
+          <span>Stabilnost</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">S</div>
+            <div class="user-info">
+              <h4>Selma</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Plaćanje jednostavno, sve je sigurno.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Sigurno plaćanje</span>
+          <span>Brza obrada</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">V</div>
+            <div class="user-info">
+              <h4>Vlado</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Gledam i sportske kanale bez ikakvih prekida.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Sportski kanali</span>
+          <span>Arena & SportKlub</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">E</div>
+            <div class="user-info">
+              <h4>Elma</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Savršeno za cijelu porodicu.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Porodični sadržaji</span>
+          <span>Videoteka</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">D</div>
+            <div class="user-info">
+              <h4>Dejan</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Stabilna konekcija, nema zastajkivanja.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Nema bufferinga</span>
+          <span>Brz server</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">A</div>
+            <div class="user-info">
+              <h4>Ana</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Brzo sam dobila pristup nakon plaćanja.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Instant aktivacija</span>
+          <span>Preporuka</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">A</div>
+            <div class="user-info">
+              <h4>Adnan</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Odlično iskustvo, nastavljam pretplatu.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Dugogodišnji nalog</span>
+          <span>Vernost</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">M</div>
+            <div class="user-info">
+              <h4>Milica</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Sve pohvale, imate moju preporuku.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Preporuka 100%</span>
+          <span>Zadovoljna</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">H</div>
+            <div class="user-info">
+              <h4>Haris</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Radi i na starijem smart TV-u bez problema.</div>
+        </div>
+        <div class="comment-footer">
+          <span>LG / Samsung</span>
+          <span>IPTV Aplikacija</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">N</div>
+            <div class="user-info">
+              <h4>Nina</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Najbolja odluka, odlična zabava za cijelu kuću.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Kino filmovi</span>
+          <span>Serije sa prevodom</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">F</div>
+            <div class="user-info">
+              <h4>Filip</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Super ponuda i mnogo kanala.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Ex-Yu Kanali</span>
+          <span>Strani kanali</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">K</div>
+            <div class="user-info">
+              <h4>Kristina</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Veoma sam zadovoljna, sve radi glatko.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Super usluga</span>
+          <span>Preporuka</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">D</div>
+            <div class="user-info">
+              <h4>Darko</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Dobar kvalitet slike čak i na sporijem internetu.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Optimizovan strim</span>
+          <span>Brzi serveri</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">M</div>
+            <div class="user-info">
+              <h4>Marina</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Moja preporuka, odličan tim.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Podrška 10/10</span>
+          <span>Korisnik</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">E</div>
+            <div class="user-info">
+              <h4>Edin</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Instalacija brza i jednostavna.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Uputstvo u 3 koraka</span>
+          <span>Brz start</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">I</div>
+            <div class="user-info">
+              <h4>Ivona</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Hvala na ljubaznosti i pomoći.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Ljubazna podrška</span>
+          <span>Zadovoljna</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">G</div>
+            <div class="user-info">
+              <h4>Goran</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Veoma povoljno i stabilno.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Povoljno</span>
+          <span>Stabilno</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">S</div>
+            <div class="user-info">
+              <h4>Sofija</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Preporučujem svima, odlična usluga.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Ocjena 5/5</span>
+          <span>Preporuka</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">D</div>
+            <div class="user-info">
+              <h4>Damir</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">IPTV bez greške, svaka čast!</div>
+        </div>
+        <div class="comment-footer">
+          <span>Bez greške</span>
+          <span>Top usluženost</span>
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="avatar">L</div>
+            <div class="user-info">
+              <h4>Lidija</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="comment-body">Svi kanali rade savršeno, hvala vam.</div>
+        </div>
+        <div class="comment-footer">
+          <span>Svi kanali aktivni</span>
+          <span>Hvala</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- NO RESULTS MESSAGE -->
+    <div id="noResults" class="no-results">
+      🔍 Nismo pronašli komentar koji odgovara vašoj pretrazi. Pokušajte sa drugim pojmom!
+    </div>
+
+    <!-- CALL TO ACTION BOX -->
+    <div class="cta-box">
+      <h3>Želite i vi Isprobati SmarticKanale?</h3>
+      <p>Pridružite se hiljadama zadovoljnih korisnika. Zatražite besplatan test na 24h odmah!</p>
+      <a href="https://wa.me/381694007480?text=Zdravo,%20želio%20bih%20besplatan%20test%20na%2024h" class="cta-btn" target="_blank" rel="noopener">
+        🚀 Zatraži Besplatan Test na WhatsApp
+      </a>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
   <footer>
-    <p>&copy; 2025 SmarticKanali TV |
-       Kontakt: <a href="https://wa.me/381694007480" target="_blank">WhatsApp +381 69 4007480</a>
-    </p>
+    <p>&copy; 2025 SmarticKanali | Kontakt: <a href="https://wa.me/381694007480" target="_blank">WhatsApp +381 69 4007480</a> | Email: <a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a></p>
   </footer>
 
+  <!-- JAVASCRIPT -->
   <script>
-    function toggleMenu() {
-      document.getElementById("mainMenu").classList.toggle("show-menu");
+    // Navigation controls
+    function openNav() {
+      document.getElementById("myNav").style.width = "100%";
     }
+
+    function closeNav() {
+      document.getElementById("myNav").style.width = "0%";
+    }
+
+    // Live Search Comments Function
+    function searchComments() {
+      const query = document.getElementById('commentSearch').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.comment-card');
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+
+        if (text.includes(query)) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      const noResults = document.getElementById('noResults');
+      noResults.style.display = (visibleCount === 0) ? 'block' : 'none';
+    }
+
+    // Add New Comment dynamically
+    function submitComment(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('userName').value.trim();
+      const rating = document.getElementById('userRating').value;
+      const commentText = document.getElementById('userComment').value.trim();
+
+      if (!name || !commentText) return;
+
+      const firstLetter = name.charAt(0).toUpperCase();
+      const starsString = '★'.repeat(parseInt(rating)) + '☆'.repeat(5 - parseInt(rating));
+
+      // Create new card HTML
+      const newCard = document.createElement('div');
+      newCard.className = 'comment-card';
+      newCard.style.animation = 'fadeIn 0.5s ease-in-out';
+      newCard.innerHTML = `
+        <div>
+          <div class="comment-header">
+            <div class="avatar">${firstLetter}</div>
+            <div class="user-info">
+              <h4>${escapeHTML(name)}</h4>
+              <span class="verified-tag">✓ Potvrđeni korisnik</span>
+            </div>
+          </div>
+          <div class="stars">${starsString}</div>
+          <div class="comment-body">${escapeHTML(commentText)}</div>
+        </div>
+        <div class="comment-footer">
+          <span>Novo dodano</span>
+          <span>Upravo sada</span>
+        </div>
+      `;
+
+      // Insert at beginning of grid
+      const grid = document.getElementById('commentsGrid');
+      grid.insertBefore(newCard, grid.firstChild);
+
+      // Save to localStorage
+      saveCommentToLocalStorage({ name, rating, commentText, firstLetter, starsString });
+
+      // Reset form
+      document.getElementById('commentForm').reset();
+      alert('Hvala vam! Vaš komentar je uspješno objavljen.');
+
+      // Update total count
+      updateTotalCount();
+    }
+
+    function escapeHTML(str) {
+      return str.replace(/[&<>'"]/g, 
+        tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+      );
+    }
+
+    function saveCommentToLocalStorage(commentObj) {
+      let saved = JSON.parse(localStorage.getItem('smartic_comments') || '[]');
+      saved.unshift(commentObj);
+      localStorage.setItem('smartic_comments', JSON.stringify(saved));
+    }
+
+    function loadSavedComments() {
+      let saved = JSON.parse(localStorage.getItem('smartic_comments') || '[]');
+      const grid = document.getElementById('commentsGrid');
+
+      saved.forEach(item => {
+        const newCard = document.createElement('div');
+        newCard.className = 'comment-card';
+        newCard.innerHTML = `
+          <div>
+            <div class="comment-header">
+              <div class="avatar">${item.firstLetter}</div>
+              <div class="user-info">
+                <h4>${escapeHTML(item.name)}</h4>
+                <span class="verified-tag">✓ Potvrđeni korisnik</span>
+              </div>
+            </div>
+            <div class="stars">${item.starsString}</div>
+            <div class="comment-body">${escapeHTML(item.commentText)}</div>
+          </div>
+          <div class="comment-footer">
+            <span>Dodato od strane korisnika</span>
+            <span>Nedavno</span>
+          </div>
+        `;
+        grid.insertBefore(newCard, grid.firstChild);
+      });
+
+      updateTotalCount();
+    }
+
+    function updateTotalCount() {
+      const cards = document.querySelectorAll('.comment-card');
+      const counter = document.getElementById('totalReviewsCount');
+      if (counter) counter.textContent = cards.length;
+    }
+
+    // Load saved comments on startup
+    window.addEventListener('DOMContentLoaded', loadSavedComments);
   </script>
 </body>
 </html>
