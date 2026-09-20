@@ -4,72 +4,1004 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kako da gledaš | SmarticKanali</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <style>
-    body { margin: 0; font-family: Arial, sans-serif; background: #fff0f0; color: #c00; }
-    header { background: #c00; color: #fff; padding: 20px; text-align: center; position: relative; }
-    .menu-toggle { position: absolute; top: 20px; right: 20px; font-size: 28px; cursor: pointer; background: none; border: none; color: #fff; }
-    .overlay { height: 100%; width: 0; position: fixed; z-index: 1000; top: 0; left: 0; background-color: rgba(192,0,0,0.95); overflow-x: hidden; transition: 0.4s; padding-top: 60px; }
-    .overlay a { display: block; text-decoration: none; font-size: 1.5em; color: #fff; padding: 15px; text-align: center; transition: 0.3s; }
-    .overlay a:hover { background: #ff4d4d; }
-    .overlay .closebtn { position: absolute; top: 15px; right: 30px; font-size: 40px; color: #fff; cursor: pointer; }
-    .content { max-width: 900px; margin: auto; padding: 30px 20px; }
-    .device { background: #fff; margin-bottom: 20px; padding: 20px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-    .device h2 { color: #c00; margin-bottom: 10px; }
-    footer { background: #c00; color: #fff; text-align: center; padding: 15px; margin-top: 40px; }
-    footer a { color: #fff0f0; text-decoration: none; }
+    :root {
+      --primary: #dc2626;
+      --primary-dark: #991b1b;
+      --primary-light: #fee2e2;
+      --bg-color: #fff0f0;
+      --card-bg: #ffffff;
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --border-color: #fecaca;
+      --shadow-sm: 0 2px 4px rgba(220, 38, 38, 0.05);
+      --shadow-md: 0 10px 25px -5px rgba(220, 38, 38, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 20px 30px -10px rgba(220, 38, 38, 0.2);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+      background: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* HEADER & NAVIGATION */
+    header {
+      background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+      color: #fff;
+      padding: 22px 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      box-shadow: 0 4px 20px rgba(153, 27, 27, 0.3);
+    }
+
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin: 0;
+      display: inline-block;
+    }
+
+    .menu-toggle {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      font-size: 26px;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .menu-toggle:hover {
+      background: rgba(255, 255, 255, 0.35);
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .overlay {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      background-color: rgba(153, 27, 27, 0.98);
+      backdrop-filter: blur(12px);
+      overflow-x: hidden;
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      padding-top: 70px;
+    }
+
+    .overlay-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .overlay a {
+      display: block;
+      text-decoration: none;
+      font-size: 1.25em;
+      font-weight: 700;
+      color: #fff;
+      padding: 14px 24px;
+      margin: 5px 0;
+      width: 100%;
+      border-radius: 14px;
+      text-align: center;
+      transition: all 0.25s ease;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .overlay a:hover {
+      background: #ffffff;
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    }
+
+    .overlay .closebtn {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 38px;
+      color: #fff;
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: auto;
+      padding: 0;
+      line-height: 1;
+    }
+
+    /* HERO BANNER & SEARCH */
+    .hero-banner {
+      background: linear-gradient(180deg, #fde8e8 0%, var(--bg-color) 100%);
+      padding: 45px 20px 25px 20px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 6px 16px;
+      border-radius: 30px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .hero-banner h2 {
+      color: var(--primary-dark);
+      font-size: 2.3rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-banner p {
+      font-size: 1.1rem;
+      color: #4b5563;
+      max-width: 680px;
+      margin: 0 auto 25px auto;
+    }
+
+    .search-box {
+      max-width: 500px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 16px 22px 16px 50px;
+      font-size: 1rem;
+      border-radius: 30px;
+      border: 2px solid var(--border-color);
+      outline: none;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    .search-box input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      color: var(--primary);
+      pointer-events: none;
+    }
+
+    /* MAIN CONTENT AREA */
+    .content {
+      max-width: 1020px;
+      margin: 35px auto;
+      padding: 0 20px;
+    }
+
+    /* TABS */
+    .tab-navigation {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 5px 5px 15px 5px;
+      margin-bottom: 30px;
+      scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-btn {
+      flex: 0 0 auto;
+      padding: 12px 20px;
+      background: var(--card-bg);
+      border: 2px solid var(--border-color);
+      border-radius: 14px;
+      color: var(--primary-dark);
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tab-btn:hover {
+      border-color: var(--primary);
+      background: #fff5f5;
+      transform: translateY(-2px);
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* DEVICE CARDS */
+    .device-grid {
+      display: grid;
+      gap: 30px;
+    }
+
+    .device-card {
+      background: var(--card-bg);
+      padding: 32px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .device-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-3px);
+    }
+
+    .device-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
+    }
+
+    .device-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .device-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .device-icon-box {
+      font-size: 2rem;
+      background: var(--primary-light);
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-color);
+    }
+
+    .device-title {
+      color: var(--primary-dark);
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+
+    .tag-badge {
+      background: #fee2e2;
+      color: var(--primary-dark);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 1px solid #fca5a5;
+    }
+
+    .device-desc {
+      font-size: 1.05rem;
+      color: #4b5563;
+      margin-bottom: 25px;
+    }
+
+    /* STEPS */
+    .steps-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+      margin-top: 15px;
+    }
+
+    .step-box {
+      background: #fffafa;
+      border: 1px solid #fecaca;
+      padding: 20px;
+      border-radius: 14px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: background 0.2s ease;
+    }
+
+    .step-box:hover {
+      background: #fff0f0;
+    }
+
+    .step-number {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: rgba(220, 38, 38, 0.2);
+    }
+
+    .step-box h4 {
+      color: var(--primary);
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      padding-right: 25px;
+    }
+
+    .step-box p {
+      font-size: 0.92rem;
+      color: #374151;
+      line-height: 1.5;
+    }
+
+    .card-footer-cta {
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px dashed var(--border-color);
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .btn-small-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary);
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: all 0.25s ease;
+    }
+
+    .btn-small-wa:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(153, 27, 27, 0.3);
+    }
+
+    /* SPEED WIDGET */
+    .interactive-widget {
+      background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%);
+      border: 2px dashed var(--border-color);
+      border-radius: var(--radius);
+      padding: 35px 25px;
+      margin: 45px 0;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .widget-title {
+      color: var(--primary-dark);
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .widget-subtitle {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      max-width: 600px;
+      margin: 0 auto 25px auto;
+    }
+
+    .speed-checks {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .speed-item {
+      background: #fff;
+      padding: 18px 15px;
+      border-radius: 14px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+
+    .speed-item:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary);
+    }
+
+    .speed-item strong {
+      display: block;
+      color: var(--primary);
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .speed-item span {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #4b5563;
+    }
+
+    /* FAQ SECTION */
+    .faq-section {
+      margin-top: 55px;
+    }
+
+    .faq-title {
+      text-align: center;
+      color: var(--primary-dark);
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 30px;
+    }
+
+    .faq-item {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s ease;
+    }
+
+    .faq-item:hover {
+      border-color: var(--primary);
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 20px 22px;
+      text-align: left;
+      background: none;
+      border: none;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      font-family: inherit;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0, 1, 0, 1), padding 0.3s ease;
+      padding: 0 22px;
+      background: #fffafa;
+      color: #374151;
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 300px;
+      padding: 0 22px 22px 22px;
+      border-top: 1px solid #fee2e2;
+    }
+
+    .faq-toggle-icon {
+      font-size: 1rem;
+      transition: transform 0.3s ease;
+      background: var(--primary-light);
+      color: var(--primary);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .faq-item.active .faq-toggle-icon {
+      transform: rotate(180deg);
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* CTA BOX */
+    .cta-box {
+      background: linear-gradient(135deg, #dc2626 0%, #881337 100%);
+      color: #fff;
+      padding: 40px 25px;
+      border-radius: var(--radius);
+      text-align: center;
+      margin-top: 50px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-box h3 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .cta-box p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #ffffff;
+      color: var(--primary-dark);
+      padding: 16px 36px;
+      border-radius: 35px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.05rem;
+      margin-top: 22px;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+
+    .cta-btn:hover {
+      background: #ffe6e6;
+      transform: scale(1.04) translateY(-2px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--primary-dark);
+      color: #fff;
+      text-align: center;
+      padding: 28px 20px;
+      margin-top: 60px;
+      font-size: 0.95rem;
+      border-top: 4px solid var(--primary);
+    }
+
+    footer a {
+      color: #fecaca;
+      text-decoration: none;
+      font-weight: 700;
+      transition: color 0.2s ease;
+    }
+
+    footer a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    .no-results {
+      display: none;
+      text-align: center;
+      padding: 40px;
+      background: #fff;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      header h1 { font-size: 1.4rem; }
+      .hero-banner h2 { font-size: 1.8rem; }
+      .device-card { padding: 22px; }
+      .device-title { font-size: 1.25rem; }
+      .cta-box h3 { font-size: 1.4rem; }
+      .tab-btn { padding: 10px 16px; font-size: 0.88rem; }
+    }
   </style>
 </head>
 <body>
 
+  <!-- HEADER -->
   <header>
     <h1>Kako da gledaš SmarticKanali</h1>
-    <button class="menu-toggle" onclick="openNav()">☰</button>
+    <button class="menu-toggle" onclick="openNav()" aria-label="Otvori navigaciju">☰</button>
   </header>
 
+  <!-- OVERLAY NAV -->
   <div id="myNav" class="overlay">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-    <a href="index.html">🏠 Početna</a>
-    <a href="cjenovnik.html">💰 Cijene i akcije</a>
-    <a href="top15.html">🎬 Top 30</a>
-    <a href="komentari.html">💬 Komentari</a>
-    <a href="tim.html">👥 Postani dio tima</a>
-    <a href="onama.html">ℹ️ O nama</a>
-    <a href="kontakt.html">📞 Kontakt</a>
-    <a href="placanje.html">💳 Plaćanje</a>
-    <a href="kako-da-gledas.html">📺 Kako da gledaš</a>
+    <button class="closebtn" onclick="closeNav()" aria-label="Zatvori navigaciju">&times;</button>
+    <div class="overlay-content">
+      <a href="index.html">🏠 Početna</a>
+      <a href="cjenovnik.html">💰 Cijene i akcije</a>
+      <a href="top15.html">🎬 Top 30</a>
+      <a href="komentari.html">💬 Komentari</a>
+      <a href="tim.html">👥 Postani dio tima</a>
+      <a href="onama.html">ℹ️ O nama</a>
+      <a href="kontakt.html">📞 Kontakt</a>
+      <a href="placanje.html">💳 Plaćanje</a>
+      <a href="kako-da-gledas.html">📺 Kako da gledaš</a>
+    </div>
   </div>
 
+  <!-- HERO BANNER -->
+  <section class="hero-banner">
+    <span class="hero-badge">⚡ Brza Aktivacija u 2 Minuta</span>
+    <h2>Gledaj bilo kada, bilo gdje!</h2>
+    <p>SmarticKanali su prilagođeni svim vašim uređajima. Pronađite vaš uređaj ispod ili upotrijebite pretragu za brza uputstva.</p>
+    
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="deviceSearch" onkeyup="searchDevices()" placeholder="Pretraži uređaj (npr. Samsung, FireStick, iPhone, LG)...">
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
   <main class="content">
-    <p>SmarticKanali možete gledati na više uređaja. Izaberite ono što vam najviše odgovara i uživajte u omiljenim kanalima gdje god da se nalazite.</p>
 
-    <div class="device">
-      <h2>📺 Smart TV</h2>
-      <p>Na modernim Smart TV uređajima jednostavno instalirajte aplikaciju i prijavite se sa korisničkim podacima. Bez dodatnih uređaja ili komplikacija.</p>
+    <!-- FILTER TABS -->
+    <div class="tab-navigation">
+      <button class="tab-btn active" onclick="filterDevice('all', this)">🌟 Svi Uređaji</button>
+      <button class="tab-btn" onclick="filterDevice('tv', this)">📺 Smart TV</button>
+      <button class="tab-btn" onclick="filterDevice('pc', this)">💻 Kompjuter / Laptop</button>
+      <button class="tab-btn" onclick="filterDevice('mobile', this)">📱 Telefon / Tablet</button>
+      <button class="tab-btn" onclick="filterDevice('box', this)">▶️ FireStick & Box</button>
     </div>
 
-    <div class="device">
-      <h2>💻 Kompjuter ili Laptop</h2>
-      <p>Otvorite našu web aplikaciju u pretraživaču i gledajte TV direktno na ekranu računara, bilo kod kuće ili na putovanju.</p>
+    <!-- DEVICE GRID -->
+    <div class="device-grid" id="deviceGrid">
+
+      <!-- SMART TV -->
+      <div class="device-card" data-category="tv" data-keywords="smart tv samsung lg android tv hisense philips sony tivimate smartiptv iptv smarters">
+        <div class="device-header">
+          <div class="device-title-wrap">
+            <div class="device-icon-box">📺</div>
+            <h3 class="device-title">Smart TV (Samsung, LG, Android TV)</h3>
+          </div>
+          <span class="tag-badge">Najpopularnije</span>
+        </div>
+        <p class="device-desc">Uživajte u više od 10.000+ TV kanala i videoteci u Full HD i 4K rezoluciji direktno na vašem televizoru bez ikakvih kablova ili antena.</p>
+
+        <div class="steps-container">
+          <div class="step-box">
+            <span class="step-number">01</span>
+            <h4>Preuzmite aplikaciju</h4>
+            <p>U App Store-u (Samsung, LG ili Google Play) pronađite aplikaciju <strong>IPTV Smarters Pro</strong>, <strong>Smart IPTV</strong> ili <strong>IBO Player</strong>.</p>
+          </div>
+          <div class="step-box">
+            <span class="step-number">02</span>
+            <h4>Unesite podatke</h4>
+            <p>Izaberite opciju <em>"Login with Xtream Codes API"</em> i unesite Korisničko ime, Šifru i Server URL koje ste dobili od naše podrške.</p>
+          </div>
+          <div class="step-box">
+            <span class="step-number">03</span>
+            <h4>Uživajte u gledanju</h4>
+            <p>Sve kategorije kanala, filmova i serija sa prevodom se učitavaju automatski za manje od minuta!</p>
+          </div>
+        </div>
+
+        <div class="card-footer-cta">
+          <a href="https://wa.me/381694007480?text=Zdravo,%20treba%20mi%20pomoć%20oko%20podešavanja%20za%20Smart%20TV" target="_blank" class="btn-small-wa">💬 Pomoć za Smart TV</a>
+        </div>
+      </div>
+
+      <!-- KOMPJUTER / LAPTOP -->
+      <div class="device-card" data-category="pc" data-keywords="kompjuter laptop windows mac macbook vlc player web player iptv smarters desktop chrome browser">
+        <div class="device-header">
+          <div class="device-title-wrap">
+            <div class="device-icon-box">💻</div>
+            <h3 class="device-title">Kompjuter i Laptop (Windows & Mac)</h3>
+          </div>
+          <span class="tag-badge">Gledaj u pregledniku</span>
+        </div>
+        <p class="device-desc">Pratite omiljene sportske utakmice i emisije tokom rada ili na putu uz maksimalnu stabilnost i brzo prebacivanje kanala.</p>
+
+        <div class="steps-container">
+          <div class="step-box">
+            <span class="step-number">01</span>
+            <h4>Web Player ili App</h4>
+            <p>Otvorite naš direktni Web Player kroz Chrome/Edge ili preuzmite besplatnu aplikaciju <strong>IPTV Smarters Pro za Windows/Mac</strong>.</p>
+          </div>
+          <div class="step-box">
+            <span class="step-number">02</span>
+            <h4>Prijava na nalog</h4>
+            <p>Unesite pristupne podatke koje pošaljemo na vaš WhatsApp ili Email. Nisu potrebna nikakva dodatna podešavanja.</p>
+          </div>
+          <div class="step-box">
+            <span class="step-number">03</span>
+            <h4>Pretraga i EPG</h4>
+            <p>Koristite brzu pretragu kanala, preglede programa (EPG) i gledajte sadržaje u visokoj rezoluciji.</p>
+          </div>
+        </div>
+
+        <div class="card-footer-cta">
+          <a href="https://wa.me/381694007480?text=Zdravo,%20treba%20mi%20pomoć%20oko%20gledanja%20na%20računaru" target="_blank" class="btn-small-wa">💬 Pomoć za PC / Laptop</a>
+        </div>
+      </div>
+
+      <!-- MOBITEL / TABLET -->
+      <div class="device-card" data-category="mobile" data-keywords="mobitel telefon tablet android iphone ipad ios xciptv gse smart iptv smarters lite mobile 4g 5g">
+        <div class="device-header">
+          <div class="device-title-wrap">
+            <div class="device-icon-box">📱</div>
+            <h3 class="device-title">Pametni Telefon & Tablet (Android & iOS)</h3>
+          </div>
+          <span class="tag-badge">U pokretu</span>
+        </div>
+        <p class="device-desc">Ponesite kompletnu televiziju sa sobom. Optimizovan strim za minimalnu potrošnju interneta na 4G i 5G mrežama.</p>
+
+        <div class="steps-container">
+          <div class="step-box">
+            <span class="step-number">01</span>
+            <h4>Instalirajte aplikaciju</h4>
+            <p>Za Android preuzmite <strong>XCIPTV</strong> ili <strong>IPTV Smarters</strong>. Za iPhone/iPad preuzmite <strong>Smarters Player Lite</strong> sa App Store-a.</p>
+          </div>
+          <div class="step-box">
+            <span class="step-number">02</span>
+            <h4>Unesite korisničke podatke</h4>
+            <p>Otvorite aplikaciju, unesite vaš korisnički nalog dobijen prilikom besplatnog testa ili pretplate.</p>
+          </div>
+          <div class="step-box">
+            <span class="step-number">03</span>
+            <h4>Gledajte bilo gdje</h4>
+            <p>Uživajte u glatkom videu uz ugrađeni elektronski vodič i brzo biranje omiljenih kanala.</p>
+          </div>
+        </div>
+
+        <div class="card-footer-cta">
+          <a href="https://wa.me/381694007480?text=Zdravo,%20treba%20mi%20pomoć%20oko%20podešavanja%20za%20mobitel" target="_blank" class="btn-small-wa">💬 Pomoć za Mobitel</a>
+        </div>
+      </div>
+
+      <!-- STREAMING BOX & FIRESTICK -->
+      <div class="device-card" data-category="box" data-keywords="firestick amazon fire tv android box nvidia shield mag formuler downloader tivimate mytvonline">
+        <div class="device-header">
+          <div class="device-title-wrap">
+            <div class="device-icon-box">▶️</div>
+            <h3 class="device-title">Streaming Uređaji (FireStick, MAG, Formuler)</h3>
+          </div>
+          <span class="tag-badge">MAX Performanse</span>
+        </div>
+        <p class="device-desc">Vrhunsko IPTV iskustvo za najzahtjevnije korisnike. Ultrabrzo prebacivanje kanala, slika u slici (PiP) i vraćanje unazad.</p>
+
+        <div class="steps-container">
+          <div class="step-box">
+            <span class="step-number">01</span>
+            <h4>Amazon FireStick</h4>
+            <p>Instalirajte besplatnu aplikaciju <strong>Downloader</strong> te unesite naš brzi kod za instalaciju vrhunske aplikacije <strong>TiviMate</strong>.</p>
+          </div>
+          <div class="step-box">
+            <span class="step-number">02</span>
+            <h4>MAG & Formuler Box</h4>
+            <p>Za MAG uređaje pošaljite nam vašu MAC adresu, a za Formuler unesite naš Portal URL u ugrađeni <strong>MYTVOnline</strong>.</p>
+          </div>
+          <div class="step-box">
+            <span class="step-number">03</span>
+            <h4>Potpuni komfor</h4>
+            <p>Uživajte u pregledu kanala po zemljama, VOD videoteci i 4K kvalitetu slike bez ikakvog zastoja.</p>
+          </div>
+        </div>
+
+        <div class="card-footer-cta">
+          <a href="https://wa.me/381694007480?text=Zdravo,%20treba%20mi%20pomoć%20oko%20podešavanja%20za%20FireStick/Box" target="_blank" class="btn-small-wa">💬 Pomoć za FireStick / Box</a>
+        </div>
+      </div>
+
     </div>
 
-    <div class="device">
-      <h2>📱 Tablet ili Telefon</h2>
-      <p>Preuzmite aplikaciju na Android ili iOS uređaju i pratite omiljene kanale bilo gdje, uz stabilnu internet konekciju.</p>
+    <!-- NO RESULTS MESSAGE -->
+    <div id="noResults" class="no-results">
+      🔍 Nismo pronašli uređaj pod tim nazivom. Kontaktirajte našu podršku za direktnu pomoć!
     </div>
 
-    <div class="device">
-      <h2>▶️ Streaming uređaji</h2>
-      <p>Koristite Chromecast, Amazon Fire Stick, Nvidia Shield ili slične uređaje i gledajte SmarticKanali na velikom ekranu.</p>
+    <!-- INTERACTIVE SPEED CHECKER WIDGET -->
+    <div class="interactive-widget">
+      <h3 class="widget-title">⚡ Preporučena Brzina Interneta</h3>
+      <p class="widget-subtitle">Za gledanje kanala u visokoj rezoluciji bez baferovanja i seckanja, izaberite vašu brzinu i provjerite preporuku:</p>
+
+      <div class="speed-checks">
+        <div class="speed-item">
+          <strong>10 Mbps</strong>
+          <span>SD Standard Kanali</span>
+        </div>
+        <div class="speed-item">
+          <strong>25 Mbps</strong>
+          <span>Full HD 1080p Striming</span>
+        </div>
+        <div class="speed-item">
+          <strong>50+ Mbps</strong>
+          <span>4K Ultra HD & VOD Filmovi</span>
+        </div>
+      </div>
     </div>
+
+    <!-- FAQ SECTION -->
+    <section class="faq-section">
+      <h3 class="faq-title">❓ Često Postavljana Pitanja</h3>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Da li mi je potreban poseban kabal ili dodatni risiver?
+          <span class="faq-toggle-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          Ne! Sve funkcioniše preko interneta. Potreban vam je samo vaš Smart TV, telefon, kompjuter ili streaming box (npr. FireStick) i stabilna internet veza.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Mogu li gledati SmarticKanale na više uređaja istovremeno?
+          <span class="faq-toggle-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          Da, u ponudi imamo pakete sa opcijom istovremenog gledanja na 1, 2 ili 3 uređaja u vašem domaćinstvu. Na taj način svako može gledati svoj omiljeni sadržaj.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Kako da dobijem BESPLATAN TEST na 24 sata?
+          <span class="faq-toggle-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          Jednostavno nam pošaljite poruku putem WhatsApp-a ili Email-a. Naš operater će vam poslati testne podatke i detaljna uputstva u roku od samo par minuta!
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Da li filmovi i serije imaju prevod (titlove)?
+          <span class="faq-toggle-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          Da! Kompletna videoteka sa hiljadama najnovijih filmova i serija sadrži ex-Yu prevode (titlove) koji se učitavaju automatski.
+        </div>
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION BOX -->
+    <div class="cta-box">
+      <h3>Spremni za Najbolje TV Iskustvo?</h3>
+      <p>Isprobajte SmarticKanale potpuno besplatno na 24 sata bez ikakvih obaveza ili skrivenih troškova.</p>
+      <a href="https://wa.me/381694007480?text=Zdravo,%20želio%20bih%20besplatan%20test%20na%2024h" class="cta-btn" target="_blank" rel="noopener">
+        🚀 Zatraži Besplatan Test na WhatsApp
+      </a>
+    </div>
+
   </main>
 
+  <!-- FOOTER -->
   <footer>
-    <p>&copy; 2025 SmarticKanali | Kontakt: <a href="https://wa.me/381694007480">WhatsApp</a> | Email: nkplus22@gmail.com</p>
+    <p>&copy; 2025 SmarticKanali | Kontakt: <a href="https://wa.me/381694007480" target="_blank">WhatsApp</a> | Email: <a href="mailto:nkplus22@gmail.com">nkplus22@gmail.com</a></p>
   </footer>
 
+  <!-- JAVASCRIPT -->
   <script>
-    function openNav() { document.getElementById("myNav").style.width = "100%"; }
-    function closeNav() { document.getElementById("myNav").style.width = "0%"; }
+    // Navigation controls
+    function openNav() {
+      document.getElementById("myNav").style.width = "100%";
+    }
+
+    function closeNav() {
+      document.getElementById("myNav").style.width = "0%";
+    }
+
+    // Category Filter Function
+    function filterDevice(category, button) {
+      const cards = document.querySelectorAll('.device-card');
+      const buttons = document.querySelectorAll('.tab-btn');
+
+      buttons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      let hasVisible = false;
+
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'block';
+          hasVisible = true;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      document.getElementById('noResults').style.display = hasVisible ? 'none' : 'block';
+    }
+
+    // Live Search Function
+    function searchDevices() {
+      const query = document.getElementById('deviceSearch').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.device-card');
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const keywords = card.getAttribute('data-keywords') || '';
+        const text = card.textContent.toLowerCase();
+
+        if (text.includes(query) || keywords.includes(query)) {
+          card.style.display = 'block';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      const noResults = document.getElementById('noResults');
+      if (visibleCount === 0) {
+        noResults.style.display = 'block';
+      } else {
+        noResults.style.display = 'none';
+      }
+    }
+
+    // FAQ Accordion Toggle
+    function toggleFaq(button) {
+      const faqItem = button.parentElement;
+      const isOpen = faqItem.classList.contains('active');
+
+      document.querySelectorAll('.faq-item').forEach(item => {
+        item.classList.remove('active');
+      });
+
+      if (!isOpen) {
+        faqItem.classList.add('active');
+      }
+    }
   </script>
 </body>
 </html>
