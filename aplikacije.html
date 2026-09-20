@@ -1,233 +1,667 @@
 <!DOCTYPE html>
-<html lang="bs">
+<html lang="bs" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aplikacije za korištenje - SmarticKanali TV</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    /* Dodatni stil samo za aplikacije – crveno/bijela tema */
-    .container {
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 0 20px;
-      position: relative;
-      z-index: 1;
-    }
-    h2 {
-      text-align: center;
-      color: #c00;                /* crveni naslov */
-      margin-bottom: 20px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-      gap: 20px;
-    }
-    .card {
-      background: #fff;           /* bijela kartica */
-      color: #c00;                /* crveni tekst */
-      border: 2px solid #c00;
-      border-radius: 10px;
-      padding: 20px;
-      text-align: center;
-      transition: .3s;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-      background: #ffe5e5;        /* blago crveno na hover */
-    }
-    .card h3 {
-      margin-top: 0;
-      color: #c00;
-    }
-    .highlight {
-      background: #c00;
-      color: #fff;
-      border-radius: 10px;
-      padding: 30px 20px;
-      text-align: center;
-      margin: 40px 0;
-    }
-    .highlight a.btn {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 12px 20px;
-      background: #fff;
-      color: #c00;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-    }
-    .highlight a.btn:hover {
-      background: #f5f5f5;
-      color: #a00;
-    }
-  </style>
-</head>
-<body>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Canvas za animiranu pozadinu -->
-  <canvas id="tech-bg"></canvas>
+<title>Aplikacije za korištenje | SmarticKanali TV</title>
 
-  <header>
-    <h1>Aplikacije za korištenje</h1>
-    <p>Podržane aplikacije za SmarticKanali TV</p>
-    <button class="menu-toggle" onclick="openNav()">☰</button>
-  </header>
+<meta name="description" content="Sve podržane IPTV aplikacije za SmarticKanali TV - Smart TV, Android, iOS, Windows, Firestick. Preuzmite našu zvaničnu aplikaciju.">
+<meta name="keywords" content="IPTV aplikacije, Smart IPTV, IPTV Smarters, XCIPTV, OTT Navigator, SmarticKanali app">
+<meta name="author" content="SmarticKanali TV">
 
-  <!-- Overlay meni -->
-  <div id="myNav" class="overlay">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-    <a href="index.html">Početna</a>
-    <a href="cjenovnik.html">Cijene i akcije</a>
-    <a href="top15.html">Top 15</a>
-    <a href="komentari.html">Komentari</a>
-    <a href="tim.html">Postani dio tima</a>
-    <a href="onama.html">O nama</a>
-    <a href="kontakt.html">Kontakt</a>
-    <a href="placanje.html">Plaćanje</a>
-    <a href="kako-da-gledas.html">Kako da gledaš</a>
-    <a href="aplikacije.html">Aplikacije za korištenje</a>
-  </div>
+<!-- Fonts & FontAwesome -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  <section class="content">
-    <div class="container">
-      <h2>Podržane aplikacije</h2>
-      <div class="grid">
-        <div class="card"><h3>Smart One IPTV</h3></div>
-        <div class="card"><h3>Smart IPTV</h3></div>
-        <div class="card"><h3>SSIPTV</h3></div>
-        <div class="card"><h3>Net IPTV</h3></div>
-        <div class="card"><h3>GSE Smart IPTV</h3></div>
-        <div class="card"><h3>IPTV Smarters</h3></div>
-        <div class="card"><h3>XCIPTV Player</h3></div>
-        <div class="card"><h3>Perfect Player</h3></div>
-        <div class="card"><h3>Lazy IPTV</h3></div>
-        <div class="card"><h3>IPTV Extreme</h3></div>
-        <div class="card"><h3>OTT Navigator</h3></div>
-        <div class="card"><h3>IPTV Pro</h3></div>
-        <div class="card"><h3>IPTV Core</h3></div>
-        <div class="card"><h3>IPTV+ Player</h3></div>
-        <div class="card"><h3>XCIPTV Pro</h3></div>
-        <div class="card"><h3>iMPlayer</h3></div>
-        <div class="card"><h3>ProgTV</h3></div>
-        <div class="card"><h3>OTTPlayer</h3></div>
-      </div>
-
-      <div class="highlight">
-        <h2>Preuzmite našu aplikaciju</h2>
-        <p>Za lakši pristup SmarticKanali TV-u na vašem Android uređaju.</p>
-        <a class="btn" href="https://www.google.com/amp/s/apkpure.com/geniuses-player-pro/com.geniusesplayerpro.geniusesplayerproiptvbox/amp" target="_blank">
-          Preuzmi aplikaciju
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 SmarticKanali TV | Kontakt:
-      <a href="https://wa.me/4915755749502">WhatsApp</a> |
-
-    </p>
-  </footer>
-
-  <!-- JS -->
-  <script>
-    function openNav(){ document.getElementById("myNav").style.width="100%"; }
-    function closeNav(){ document.getElementById("myNav").style.width="0%"; }
-
-    // Canvas particles – zadržano iz originala
-    const canvas = document.getElementById('tech-bg');
-    const ctx = canvas.getContext('2d');
-    let width = canvas.width = window.innerWidth;
-    let height = canvas.height = window.innerHeight;
-
-    window.addEventListener('resize', () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    });
-
-    const particleCount = 80;
-    const particles = [];
-    const icons = [];
-    const iconUrls = [
-      'https://cdn-icons-png.flaticon.com/32/1087/1087863.png',
-      'https://cdn-icons-png.flaticon.com/32/4140/4140048.png',
-      'https://cdn-icons-png.flaticon.com/32/715/715676.png'
-    ];
-    const iconImgs = iconUrls.map(src => { const i = new Image(); i.src=src; return i; });
-
-    class Particle {
-      constructor(){
-        this.x=Math.random()*width;
-        this.y=Math.random()*height;
-        this.size=Math.random()*2+1;
-        this.speedX=Math.random()*1-0.5;
-        this.speedY=Math.random()*1-0.5;
-      }
-      update(){
-        this.x+=this.speedX;
-        this.y+=this.speedY;
-        if(this.x>width)this.x=0;
-        if(this.x<0)this.x=width;
-        if(this.y>height)this.y=0;
-        if(this.y<0)this.y=height;
-      }
-      draw(){
-        ctx.fillStyle='rgba(204,0,0,0.7)';    // crvene čestice
-        ctx.beginPath();
-        ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-        ctx.fill();
-      }
-    }
-
-    class Icon {
-      constructor(img){
-        this.img=img;
-        this.x=Math.random()*width;
-        this.y=Math.random()*height;
-        this.size=32+Math.random()*16;
-        this.speedX=Math.random()*1-0.5;
-        this.speedY=Math.random()*1-0.5;
-      }
-      update(){
-        this.x+=this.speedX;
-        this.y+=this.speedY;
-        if(this.x>width)this.x=0;
-        if(this.x<0)this.x=width;
-        if(this.y>height)this.y=0;
-        if(this.y<0)this.y=height;
-      }
-      draw(){ ctx.drawImage(this.img,this.x,this.y,this.size,this.size); }
-    }
-
-    for(let i=0;i<particleCount;i++) particles.push(new Particle());
-    for(let i=0;i<20;i++) icons.push(new Icon(iconImgs[Math.floor(Math.random()*iconImgs.length)]));
-
-    function animate(){
-      ctx.clearRect(0,0,width,height);
-      particles.forEach(p=>{p.update();p.draw();});
-      for(let i=0;i<particles.length;i++){
-        for(let j=i+1;j<particles.length;j++){
-          let dx=particles[i].x-particles[j].x;
-          let dy=particles[i].y-particles[j].y;
-          let dist=Math.sqrt(dx*dx+dy*dy);
-          if(dist<100){
-            ctx.strokeStyle='rgba(204,0,0,0.1)'; // linije u crvenoj nijansi
-            ctx.lineWidth=1;
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x,particles[i].y);
-            ctx.lineTo(particles[j].x,particles[j].y);
-            ctx.stroke();
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+        },
+        colors: {
+          brand: {
+            red: '#e50914',
+            darkRed: '#b20710',
+            glow: '#ff2e3b',
+            darkBg: '#0b0c10',
+            cardBg: '#12141d',
+            accent: '#1f2430'
           }
+        },
+        boxShadow: {
+          'neon': '0 0 25px rgba(229, 9, 20, 0.45)',
+          'neon-sm': '0 0 12px rgba(229, 9, 20, 0.3)',
+          'card': '0 10px 30px -10px rgba(0, 0, 0, 0.5)'
         }
       }
-      icons.forEach(ic=>{ic.update();ic.draw();});
-      requestAnimationFrame(animate);
     }
-    animate();
-  </script>
+  }
+</script>
+
+<style>
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0b0c10;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #e50914;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b20710;
+  }
+
+  /* Canvas Positioning */
+  #tech-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* Glassmorphism */
+  .glass-panel {
+    background: rgba(18, 20, 29, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  .glass-nav {
+    background: rgba(11, 12, 16, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .gradient-brand-text {
+    background: linear-gradient(135deg, #ff4d4d 0%, #e50914 50%, #990000 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+</style>
+</head>
+
+<body class="bg-brand-darkBg text-slate-100 font-sans antialiased overflow-x-hidden selection:bg-brand-red selection:text-white">
+
+<canvas id="tech-bg"></canvas>
+
+<!-- Header -->
+<header class="sticky top-0 z-50 glass-nav transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="index.html" class="flex items-center gap-3 group">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-darkRed to-brand-red flex items-center justify-center shadow-neon group-hover:scale-105 transition-transform duration-300">
+        <i class="fa-solid font-bold fa-tv text-white text-xl"></i>
+      </div>
+      <div>
+        <span class="text-2xl font-extrabold tracking-wider text-white">SMARTIC<span class="text-brand-red">KANALI</span></span>
+        <span class="block text-[10px] tracking-widest text-gray-400 font-semibold uppercase -mt-1">PREMIUM IPTV TV</span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation Links -->
+    <nav class="hidden lg:flex items-center gap-6 text-sm font-medium">
+      <a href="index.html" class="text-gray-300 hover:text-white transition-colors">Početna</a>
+      <a href="cjenovnik.html" class="text-gray-300 hover:text-white transition-colors">Cijene i akcije</a>
+      <a href="top15.html" class="text-gray-300 hover:text-white transition-colors">Top 30</a>
+      <a href="komentari.html" class="text-gray-300 hover:text-white transition-colors">Komentari</a>
+      <a href="kako-da-gledas.html" class="text-gray-300 hover:text-white transition-colors">Kako gledati</a>
+      <a href="aplikacije.html" class="text-brand-red font-semibold transition-colors">Aplikacije</a>
+      <a href="onama.html" class="text-gray-300 hover:text-white transition-colors">O nama</a>
+      <a href="kontakt.html" class="text-gray-300 hover:text-white transition-colors">Kontakt</a>
+    </nav>
+
+    <!-- Header Actions -->
+    <div class="hidden sm:flex items-center gap-4">
+      <a href="https://wa.me/381694007480?text=Zdravo,%20treba%20mi%20pomoć%20oko%20podešavanja%20aplikacije" target="_blank" class="px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-brand-red to-brand-darkRed text-white hover:shadow-neon hover:scale-105 transition-all duration-300 flex items-center gap-2">
+        <i class="fa-solid fa-headset"></i> Pomoć oko instalacije
+      </a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button class="lg:hidden text-gray-300 hover:text-white p-2 rounded-lg bg-brand-accent/50 focus:outline-none" onclick="openNav()" aria-label="Otvori Meni">
+      <i class="fa-solid fa-bars text-2xl"></i>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile Overlay Navigation -->
+<div id="myNav" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl transition-all duration-500 opacity-0 pointer-events-none flex flex-col justify-between p-6">
+  <div class="flex items-center justify-between border-b border-gray-800 pb-4">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-lg bg-brand-red flex items-center justify-center text-white font-bold">
+        <i class="fa-solid fa-tv"></i>
+      </div>
+      <span class="text-xl font-bold text-white tracking-wide">SmarticKanali TV</span>
+    </div>
+    <button onclick="closeNav()" class="text-gray-400 hover:text-white p-2 text-3xl focus:outline-none">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+
+  <nav class="flex flex-col gap-3 my-auto py-6 overflow-y-auto text-center">
+    <a href="index.html" onclick="closeNav()" class="py-2.5 text-lg font-semibold text-gray-200 hover:text-white hover:bg-brand-red/10 rounded-xl transition-all">Početna</a>
+    <a href="cjenovnik.html" onclick="closeNav()" class="py-2.5 text-lg font-semibold text-gray-200 hover:text-white hover:bg-brand-red/10 rounded-xl transition-all">Cijene i akcije</a>
+    <a href="top15.html" onclick="closeNav()" class="py-2.5 text-lg font-semibold text-gray-200 hover:text-white hover:bg-brand-red/10 rounded-xl transition-all">Top 30 Kanala</a>
+    <a href="komentari.html" onclick="closeNav()" class="py-2.5 text-lg font-semibold text-gray-200 hover:text-white hover:bg-brand-red/10 rounded-xl transition-all">Komentari korisnika</a>
+    <a href="tim.html" onclick="closeNav()" class="py-2.5 text-lg font-semibold text-gray-200 hover:text-white hover:bg-brand-red/10 rounded-xl transition-all">Postani dio tima</a>
+    <a href="onama.html" onclick="closeNav()" class="py-2.5 text-lg font-semibold text-gray-200 hover:text-white hover:bg-brand-red/10 rounded-xl transition-all">O nama</a>
+    <a href="kontakt.html" onclick="closeNav()" class="py-2.5 text-lg font-semibold text-gray-200 hover:text-white hover:bg-brand-red/10 rounded-xl transition-all">Kontakt</a>
+    <a href="placanje.html" onclick="closeNav()" class="py-2.5 text-lg font-semibold text-gray-200 hover:text-white hover:bg-brand-red/10 rounded-xl transition-all">Načini Plaćanja</a>
+    <a href="kako-da-gledas.html" onclick="closeNav()" class="py-2.5 text-lg font-semibold text-gray-200 hover:text-white hover:bg-brand-red/10 rounded-xl transition-all">Kako da gledaš</a>
+    <a href="aplikacije.html" onclick="closeNav()" class="py-2.5 text-lg font-semibold text-brand-red hover:bg-brand-red/10 rounded-xl transition-all">Aplikacije za korištenje</a>
+  </nav>
+
+  <div class="pt-4 border-t border-gray-800 text-center">
+    <a href="https://wa.me/381694007480" target="_blank" class="w-full py-3.5 rounded-xl bg-green-600 hover:bg-green-500 text-white font-bold flex items-center justify-center gap-2 shadow-lg transition-all">
+      <i class="fa-brands fa-whatsapp text-xl"></i> Kontaktiraj WhatsApp
+    </a>
+  </div>
+</div>
+
+<!-- Main Banner Hero -->
+<section class="relative pt-12 pb-16 md:pt-16 md:pb-20 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel text-xs font-semibold text-brand-red border border-brand-red/30 mb-6">
+      <i class="fa-solid fa-download"></i> Brza i jednostavna instalacija
+    </div>
+
+    <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight max-w-4xl mx-auto mb-4">
+      Aplikacije za <span class="gradient-brand-text">korištenje</span>
+    </h1>
+
+    <p class="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto mb-8 font-normal leading-relaxed">
+      SmarticKanali TV servis je u potpunosti kompatibilan sa svim najpopularnijim IPTV playerima na tržištu. Izaberite aplikaciju koja vam najviše odgovara!
+    </p>
+
+    <!-- Search Box Filter -->
+    <div class="max-w-md mx-auto relative mb-8">
+      <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+      <input type="text" id="appSearch" onkeyup="filterApps()" placeholder="Pretraži aplikaciju (npr. Smarters, Smart TV)..." class="w-full pl-11 pr-4 py-3 rounded-full bg-brand-cardBg/90 border border-gray-700 text-white text-sm focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red transition-all shadow-inner">
+    </div>
+  </div>
+</section>
+
+<!-- Official App Download Highlight Box -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+  <div class="relative glass-panel rounded-3xl p-8 md:p-10 border border-brand-red/40 overflow-hidden shadow-2xl bg-gradient-to-r from-brand-cardBg via-brand-cardBg to-brand-red/10">
+    <div class="absolute -right-16 -top-16 w-64 h-64 bg-brand-red/20 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+      <div class="md:col-span-2">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-brand-red/20 text-brand-red text-xs font-bold uppercase mb-4">
+          <i class="fa-brands fa-android text-sm"></i> Preporučeno za Android
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-3">Preuzmite našu zvaničnu aplikaciju</h2>
+        <p class="text-gray-300 text-sm sm:text-base leading-relaxed mb-6">
+          Za najlakši i najbrži pristup SmarticKanali TV-u na vašem Android pametnom telefonu, TV Box uređaju ili Android TV-u. Aplikacija se automatski podešava i pruža maksimalnu stabilnost.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="https://www.google.com/amp/s/apkpure.com/geniuses-player-pro/com.geniusesplayerpro.geniusesplayerproiptvbox/amp" target="_blank" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-brand-red to-brand-darkRed text-white font-bold text-sm shadow-neon hover:scale-105 transition-all flex items-center gap-3">
+            <i class="fa-solid fa-download text-lg"></i> Preuzmi aplikaciju (APK)
+          </a>
+          <a href="https://wa.me/381694007480?text=Trebaju%20mi%20upute%20za%20instalaciju%20aplikacije" target="_blank" class="px-6 py-3.5 rounded-full glass-panel text-white font-semibold text-sm hover:bg-white/10 border border-gray-700 transition-all flex items-center gap-2">
+            <i class="fa-solid fa-circle-info text-brand-red"></i> Upute za instalaciju
+          </a>
+        </div>
+      </div>
+
+      <div class="flex justify-center md:justify-end">
+        <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-3xl bg-gradient-to-tr from-brand-red to-brand-glow p-1 shadow-neon flex items-center justify-center">
+          <div class="w-full h-full bg-brand-cardBg rounded-[22px] flex flex-col items-center justify-center gap-2 text-center p-4">
+            <i class="fa-solid fa-circle-play text-4xl text-brand-red"></i>
+            <span class="text-xs font-extrabold text-white uppercase tracking-wider">Geniuses Player</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Supported Apps Grid Section -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+  <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
+    <div>
+      <h2 class="text-2xl font-extrabold text-white">Podržane aplikacije</h2>
+      <p class="text-xs sm:text-sm text-gray-400">Kliknite ili izaberite bilo koju aplikaciju za više informacija</p>
+    </div>
+    <span class="text-xs font-semibold px-3 py-1.5 rounded-full bg-brand-accent/60 text-gray-300 border border-gray-800" id="appsCount">
+      Prikazano 18 aplikacija
+    </span>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5" id="appsGrid">
+    
+    <!-- App Card 1 -->
+    <div class="app-card glass-panel p-5 rounded-2xl border border-gray-800 hover:border-brand-red/50 transition-all group hover:-translate-y-1">
+      <div class="flex items-center gap-4 mb-3">
+        <div class="w-12 h-12 rounded-xl bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white flex items-center justify-center text-xl transition-colors shadow-sm">
+          <i class="fa-solid fa-tv"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-base app-name">Smart One IPTV</h3>
+          <span class="text-[10px] font-semibold text-green-400 bg-green-500/10 px-2 py-0.5 rounded-full">Smart TV</span>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 leading-relaxed">Odličan izbor za LG, Samsung i Android pametne televizore.</p>
+    </div>
+
+    <!-- App Card 2 -->
+    <div class="app-card glass-panel p-5 rounded-2xl border border-gray-800 hover:border-brand-red/50 transition-all group hover:-translate-y-1">
+      <div class="flex items-center gap-4 mb-3">
+        <div class="w-12 h-12 rounded-xl bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white flex items-center justify-center text-xl transition-colors shadow-sm">
+          <i class="fa-solid fa-display"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-base app-name">Smart IPTV</h3>
+          <span class="text-[10px] font-semibold text-green-400 bg-green-500/10 px-2 py-0.5 rounded-full">Popularno</span>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 leading-relaxed">Klasična i najpoznatija IPTV aplikacija za sve Smart TV uređaje.</p>
+    </div>
+
+    <!-- App Card 3 -->
+    <div class="app-card glass-panel p-5 rounded-2xl border border-gray-800 hover:border-brand-red/50 transition-all group hover:-translate-y-1">
+      <div class="flex items-center gap-4 mb-3">
+        <div class="w-12 h-12 rounded-xl bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white flex items-center justify-center text-xl transition-colors shadow-sm">
+          <i class="fa-solid fa-sliders"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-base app-name">SSIPTV</h3>
+          <span class="text-[10px] font-semibold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-full">Besplatno</span>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 leading-relaxed">Besplatna aplikacija dostupna na skoro svim TV store-ovima.</p>
+    </div>
+
+    <!-- App Card 4 -->
+    <div class="app-card glass-panel p-5 rounded-2xl border border-gray-800 hover:border-brand-red/50 transition-all group hover:-translate-y-1">
+      <div class="flex items-center gap-4 mb-3">
+        <div class="w-12 h-12 rounded-xl bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white flex items-center justify-center text-xl transition-colors shadow-sm">
+          <i class="fa-solid fa-network-wired"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-base app-name">Net IPTV</h3>
+          <span class="text-[10px] font-semibold text-green-400 bg-green-500/10 px-2 py-0.5 rounded-full">Smart TV</span>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 leading-relaxed">Brzo učitavanje i stabilna reprodukcija za Samsung i LG TV.</p>
+    </div>
+
+    <!-- App Card 5 -->
+    <div class="app-card glass-panel p-5 rounded-2xl border border-gray-800 hover:border-brand-red/50 transition-all group hover:-translate-y-1">
+      <div class="flex items-center gap-4 mb-3">
+        <div class="w-12 h-12 rounded-xl bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white flex items-center justify-center text-xl transition-colors shadow-sm">
+          <i class="fa-brands fa-apple"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-base app-name">GSE Smart IPTV</h3>
+          <span class="text-[10px] font-semibold text-gray-300 bg-gray-700/50 px-2 py-0.5 rounded-full">iOS & Android</span>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 leading-relaxed">Sveobuhvatno rješenje za Apple iPhone, iPad i Android mobilne uređaje.</p>
+    </div>
+
+    <!-- App Card 6 -->
+    <div class="app-card glass-panel p-5 rounded-2xl border border-gray-800 hover:border-brand-red/50 transition-all group hover:-translate-y-1">
+      <div class="flex items-center gap-4 mb-3">
+        <div class="w-12 h-12 rounded-xl bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white flex items-center justify-center text-xl transition-colors shadow-sm">
+          <i class="fa-solid fa-play"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-base app-name">IPTV Smarters</h3>
+          <span class="text-[10px] font-semibold text-yellow-400 bg-yellow-500/10 px-2 py-0.5 rounded-full">Top Preporuka</span>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 leading-relaxed">Jedna od najpopularnijih aplikacija sa sjajnim interfejsom za filmove i serije.</p>
+    </div>
+
+    <!-- App Card 7 -->
+    <div class="app-card glass-panel p-5 rounded-2xl border border-gray-800 hover:border-brand-red/50 transition-all group hover:-translate-y-1">
+      <div class="flex items-center gap-4 mb-3">
+        <div class="w-12 h-12 rounded-xl bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white flex items-center justify-center text-xl transition-colors shadow-sm">
+          <i class="fa-solid fa-mobile-screen"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-base app-name">XCIPTV Player</h3>
+          <span class="text-[10px] font-semibold text-green-400 bg-green-500/10 px-2 py-0.5 rounded-full">Android Box</span>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 leading-relaxed">Savršeno optimizovan player za Android Box i Firestick uređaje.</p>
+    </div>
+
+    <!-- App Card 8 -->
+    <div class="app-card glass-panel p-5 rounded-2xl border border-gray-800 hover:border-brand-red/50 transition-all group hover:-translate-y-1">
+      <div class="flex items-center gap-4 mb-3">
+        <div class="w-12 h-12 rounded-xl bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white flex items-center justify-center text-xl transition-colors shadow-sm">
+          <i class="fa-solid fa-star"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-base app-name">Perfect Player</h3>
+          <span class="text-[10px] font-semibold text-gray-300 bg-gray-700/50 px-2 py-0.5 rounded-full">M3U List</span>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 leading-relaxed">Stabilan i brz player sa odličnim EPG vodičem.</p>
+    </div>
+
+    <!-- App Card 9 -->
+    <div class="app-card glass-panel p-5 rounded-2xl border border-gray-800 hover:border-brand-red/50 transition-all group hover:-translate-y-1">
+      <div class="flex items-center gap-4 mb-3">
+        <div class="w-12 h-12 rounded-xl bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white flex items-center justify-center text-xl transition-colors shadow-sm">
+          <i class="fa-solid fa-couch"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-base app-name">Lazy IPTV</h3>
+          <span class="text-[10px] font-semibold text-gray-300 bg-gray-700/50 px-2 py-0.5 rounded-full">Android</span>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 leading-relaxed">Jednostavna i lagana aplikacija za sve Android uređaje.</p>
+    </div>
+
+    <!-- App Card 10 -->
+    <div class="app-card glass-panel p-5 rounded-2xl border border-gray-800 hover:border-brand-red/50 transition-all group hover:-translate-y-1">
+      <div class="flex items-center gap-4 mb-3">
+        <div class="w-12 h-12 rounded-xl bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white flex items-center justify-center text-xl transition-colors shadow-sm">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-base app-name">IPTV Extreme</h3>
+          <span class="text-[10px] font-semibold text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-full">Napredno</span>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 leading-relaxed">Bogat opcijama i naprednim funkcijama za snimanje i EPG.</p>
+    </div>
+
+    <!-- App Card 11 -->
+    <div class="app-card glass-panel p-5 rounded-2xl border border-gray-800 hover:border-brand-red/50 transition-all group hover:-translate-y-1">
+      <div class="flex items-center gap-4 mb-3">
+        <div class="w-12 h-12 rounded-xl bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white flex items-center justify-center text-xl transition-colors shadow-sm">
+          <i class="fa-solid fa-compass"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-base app-name">OTT Navigator</h3>
+          <span class="text-[10px] font-semibold text-yellow-400 bg-yellow-500/10 px-2 py-0.5 rounded-full">Top Preporuka</span>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 leading-relaxed">Izuzetno brz odziv i moderan korisnički interfejs.</p>
+    </div>
+
+    <!-- App Card 12 -->
+    <div class="app-card glass-panel p-5 rounded-2xl border border-gray-800 hover:border-brand-red/50 transition-all group hover:-translate-y-1">
+      <div class="flex items-center gap-4 mb-3">
+        <div class="w-12 h-12 rounded-xl bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white flex items-center justify-center text-xl transition-colors shadow-sm">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-base app-name">IPTV Pro</h3>
+          <span class="text-[10px] font-semibold text-green-400 bg-green-500/10 px-2 py-0.5 rounded-full">Android</span>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 leading-relaxed">Pouzdana i proverena aplikacija bez reklama.</p>
+    </div>
+
+    <!-- App Card 13 -->
+    <div class="app-card glass-panel p-5 rounded-2xl border border-gray-800 hover:border-brand-red/50 transition-all group hover:-translate-y-1">
+      <div class="flex items-center gap-4 mb-3">
+        <div class="w-12 h-12 rounded-xl bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white flex items-center justify-center text-xl transition-colors shadow-sm">
+          <i class="fa-solid fa-microchip"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-base app-name">IPTV Core</h3>
+          <span class="text-[10px] font-semibold text-gray-300 bg-gray-700/50 px-2 py-0.5 rounded-full">Sistem</span>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 leading-relaxed">Osnovni player pogodan za starije modele uređaja.</p>
+    </div>
+
+    <!-- App Card 14 -->
+    <div class="app-card glass-panel p-5 rounded-2xl border border-gray-800 hover:border-brand-red/50 transition-all group hover:-translate-y-1">
+      <div class="flex items-center gap-4 mb-3">
+        <div class="w-12 h-12 rounded-xl bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white flex items-center justify-center text-xl transition-colors shadow-sm">
+          <i class="fa-solid fa-circle-plus"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-base app-name">IPTV+ Player</h3>
+          <span class="text-[10px] font-semibold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-full">iOS / Mac</span>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 leading-relaxed">Odličan izbor za Apple ekosistem i Mac računare.</p>
+    </div>
+
+    <!-- App Card 15 -->
+    <div class="app-card glass-panel p-5 rounded-2xl border border-gray-800 hover:border-brand-red/50 transition-all group hover:-translate-y-1">
+      <div class="flex items-center gap-4 mb-3">
+        <div class="w-12 h-12 rounded-xl bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white flex items-center justify-center text-xl transition-colors shadow-sm">
+          <i class="fa-solid fa-gem"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-base app-name">XCIPTV Pro</h3>
+          <span class="text-[10px] font-semibold text-yellow-400 bg-yellow-500/10 px-2 py-0.5 rounded-full">Pro Izdanje</span>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 leading-relaxed">Unaprijeđena verzija XCIPTV playera sa dodatnim skinovima.</p>
+    </div>
+
+    <!-- App Card 16 -->
+    <div class="app-card glass-panel p-5 rounded-2xl border border-gray-800 hover:border-brand-red/50 transition-all group hover:-translate-y-1">
+      <div class="flex items-center gap-4 mb-3">
+        <div class="w-12 h-12 rounded-xl bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white flex items-center justify-center text-xl transition-colors shadow-sm">
+          <i class="fa-solid fa-film"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-base app-name">iMPlayer</h3>
+          <span class="text-[10px] font-semibold text-brand-red bg-brand-red/10 px-2 py-0.5 rounded-full">Premium UI</span>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 leading-relaxed">Moderan interfejs sličan kablovskim operaterima.</p>
+    </div>
+
+    <!-- App Card 17 -->
+    <div class="app-card glass-panel p-5 rounded-2xl border border-gray-800 hover:border-brand-red/50 transition-all group hover:-translate-y-1">
+      <div class="flex items-center gap-4 mb-3">
+        <div class="w-12 h-12 rounded-xl bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white flex items-center justify-center text-xl transition-colors shadow-sm">
+          <i class="fa-solid fa-desktop"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-base app-name">ProgTV</h3>
+          <span class="text-[10px] font-semibold text-gray-300 bg-gray-700/50 px-2 py-0.5 rounded-full">Windows / PC</span>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 leading-relaxed">Tradicionalan i veoma stabilan player za Windows računare.</p>
+    </div>
+
+    <!-- App Card 18 -->
+    <div class="app-card glass-panel p-5 rounded-2xl border border-gray-800 hover:border-brand-red/50 transition-all group hover:-translate-y-1">
+      <div class="flex items-center gap-4 mb-3">
+        <div class="w-12 h-12 rounded-xl bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white flex items-center justify-center text-xl transition-colors shadow-sm">
+          <i class="fa-solid fa-cloud"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-base app-name">OTTPlayer</h3>
+          <span class="text-[10px] font-semibold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-full">Cloud baziran</span>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 leading-relaxed">Omogućava sinhronizaciju listi preko vašeg korisničkog računa.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-black/90 border-t border-gray-800 pt-16 pb-12 text-gray-400">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+      
+      <!-- Col 1 -->
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-9 h-9 rounded-xl bg-brand-red flex items-center justify-center text-white font-bold">
+            <i class="fa-solid fa-tv"></i>
+          </div>
+          <span class="text-2xl font-extrabold text-white">SmarticKanali TV</span>
+        </div>
+        <p class="text-sm text-gray-400 max-w-sm mb-6 leading-relaxed">
+          Vodeći IPTV provajder na Balkanu. Preko 9 godina tradicije, vrhunski kvalitet slike i neprikosnovena korisnička podrška 24/7.
+        </p>
+        <p class="text-xs text-gray-500">&copy; 2026 SmarticKanali TV. Sva prava zadržana.</p>
+      </div>
+
+      <!-- Col 2 -->
+      <div>
+        <h4 class="text-white font-bold text-base mb-4 border-b border-brand-red/40 pb-2 inline-block">Navigacija</h4>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="index.html" class="hover:text-brand-red transition-colors">Početna</a></li>
+          <li><a href="cjenovnik.html" class="hover:text-brand-red transition-colors">Cijene i Akcije</a></li>
+          <li><a href="top15.html" class="hover:text-brand-red transition-colors">Top 30 Kanala</a></li>
+          <li><a href="komentari.html" class="hover:text-brand-red transition-colors">Komentari</a></li>
+          <li><a href="kako-da-gledas.html" class="hover:text-brand-red transition-colors">Kako gledati</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3 -->
+      <div>
+        <h4 class="text-white font-bold text-base mb-4 border-b border-brand-red/40 pb-2 inline-block">Korisni linkovi</h4>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="aplikacije.html" class="hover:text-brand-red transition-colors">Aplikacije</a></li>
+          <li><a href="tim.html" class="hover:text-brand-red transition-colors">Postani dio tima</a></li>
+          <li><a href="onama.html" class="hover:text-brand-red transition-colors">O nama</a></li>
+          <li><a href="placanje.html" class="hover:text-brand-red transition-colors">Načini Plaćanja</a></li>
+          <li><a href="kontakt.html" class="hover:text-brand-red transition-colors">Kontakt Podrška</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom Line -->
+    <div class="border-t border-gray-800/80 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+      <p>Kontakt WhatsApp: <a href="https://wa.me/381694007480" class="text-white hover:text-brand-red font-semibold">+381 69 4007480</a></p>
+      <div class="flex gap-4">
+        <a href="kontakt.html" class="hover:text-white">Podrška</a>
+        <a href="placanje.html" class="hover:text-white">Sigurno plaćanje</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/381694007480" target="_blank" aria-label="Kontaktirajte nas na WhatsApp" class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-5 rounded-full shadow-[0_0_20px_rgba(37,211,102,0.5)] flex items-center gap-3 hover:scale-110 transition-all duration-300 group">
+  <i class="fa-brands fa-whatsapp text-2xl group-hover:rotate-12 transition-transform"></i>
+  <span class="text-sm font-extrabold hidden sm:inline">WhatsApp Podrška</span>
+</a>
+
+<script>
+// Mobile Navigation
+function openNav() {
+  const nav = document.getElementById('myNav');
+  nav.classList.remove('opacity-0', 'pointer-events-none');
+  nav.classList.add('opacity-100', 'pointer-events-auto');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeNav() {
+  const nav = document.getElementById('myNav');
+  nav.classList.add('opacity-0', 'pointer-events-none');
+  nav.classList.remove('opacity-100', 'pointer-events-auto');
+  document.body.style.overflow = 'auto';
+}
+
+// Live Search Filter for Apps
+function filterApps() {
+  const input = document.getElementById('appSearch').value.toLowerCase();
+  const cards = document.querySelectorAll('.app-card');
+  let visibleCount = 0;
+
+  cards.forEach(card => {
+    const name = card.querySelector('.app-name').innerText.toLowerCase();
+    const desc = card.innerText.toLowerCase();
+    if (name.includes(input) || desc.includes(input)) {
+      card.style.display = "block";
+      visibleCount++;
+    } else {
+      card.style.display = "none";
+    }
+  });
+
+  document.getElementById('appsCount').innerText = `Prikazano ${visibleCount} aplikacija`;
+}
+
+// Tech Particle Canvas
+const canvas = document.getElementById('tech-bg');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+let particles = [];
+const particleCount = Math.min(Math.floor(window.innerWidth / 15), 70);
+
+for (let i = 0; i < particleCount; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 0.6,
+    vy: (Math.random() - 0.5) * 0.6,
+    radius: Math.random() * 2 + 1
+  });
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  particles.forEach((p, index) => {
+    p.x += p.vx;
+    p.y += p.vy;
+
+    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+    ctx.fillStyle = "rgba(229, 9, 20, 0.6)";
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    ctx.fill();
+
+    for (let j = index + 1; j < particles.length; j++) {
+      const p2 = particles[j];
+      const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+      if (dist < 120) {
+        ctx.strokeStyle = `rgba(229, 9, 20, ${0.2 * (1 - dist / 120)})`;
+        ctx.lineWidth = 0.6;
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+      }
+    }
+  });
+
+  requestAnimationFrame(animateParticles);
+}
+
+window.onload = function() {
+  animateParticles();
+};
+</script>
 
 </body>
 </html>
