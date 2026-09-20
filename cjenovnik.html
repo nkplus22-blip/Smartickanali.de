@@ -1,137 +1,619 @@
 <!DOCTYPE html>
-<html lang="bs">
+<html lang="bs" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cijene i akcije - SmarticKanali TV</title>
-  <style>
-    body { margin:0; font-family:Arial,sans-serif; background:#fff; color:#c00; }
-    header { background:#c00; color:#fff; padding:25px; text-align:center; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    /* Navigacija */
-    nav { background:#d60000; display:flex; justify-content:center; flex-wrap:wrap; }
-    nav a { color:#fff; text-decoration:none; padding:12px 18px; display:block; }
-    nav a:hover { background:#ffe5e5; color:#c00; }
+<title>Cijene i Akcije | SmarticKanali TV</title>
 
-    /* Hamburger meni */
-    .menu-toggle {
-      display:none;
-      flex-direction:column;
-      cursor:pointer;
-      padding:10px;
-      position:absolute;
-      top:20px;
-      right:20px;
-    }
-    .menu-toggle div {
-      width:30px;
-      height:4px;
-      background:#fff;
-      margin:5px 0;
-      transition:0.3s;
-    }
+<meta name="description" content="Pregledajte naše pristupačne IPTV pakete i akcije. Basic, Medium i Pro paketi, te posebne pogodnosti i besplatni test na 24h.">
+<meta name="keywords" content="IPTV cijene, IPTV paketi, IPTV akcija, SmarticKanali cjenovnik, jeftin IPTV, EXYU IPTV">
+<meta name="author" content="SmarticKanali TV">
 
-    /* Mobile prikaz */
-    @media (max-width:768px) {
-      nav {
-        display:none;
-        flex-direction:column;
-        text-align:center;
+<!-- Fonts & FontAwesome -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+        },
+        colors: {
+          brand: {
+            red: '#e50914',
+            darkRed: '#b20710',
+            glow: '#ff2e3b',
+            darkBg: '#0b0c10',
+            cardBg: '#12141d',
+            accent: '#1f2430'
+          }
+        },
+        boxShadow: {
+          'neon': '0 0 25px rgba(229, 9, 20, 0.45)',
+          'neon-sm': '0 0 12px rgba(229, 9, 20, 0.3)',
+          'card': '0 10px 30px -10px rgba(0, 0, 0, 0.5)'
+        }
       }
-      nav.active { display:flex; }
-      .menu-toggle { display:flex; }
     }
+  }
+</script>
 
-    .container { max-width:1100px; margin:40px auto; padding:0 20px; }
-    h2 { text-align:center; color:#c00; margin-bottom:20px; }
-    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:20px; }
-    .card { background:#fff; border:2px solid #c00; border-radius:10px; padding:20px; text-align:center; transition:.3s; }
-    .card:hover { transform:translateY(-5px); }
-    .card h3 { margin-top:0; color:#c00; }
-    .card p { margin:10px 0; font-size:1.1em; }
-    .old-price { text-decoration:line-through; color:gray; font-size:0.9em; }
-    .btn { display:inline-block; margin-top:12px; padding:10px 18px; background:#c00; color:#fff; text-decoration:none; border-radius:6px; }
-    .btn:hover { background:#a00; }
-    footer { background:#c00; color:#fff; text-align:center; padding:20px; margin-top:40px; }
-    footer a { color:#fff; text-decoration:underline; }
-  </style>
+<style>
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0b0c10;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #e50914;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b20710;
+  }
+
+  /* Canvas Positioning */
+  #tech-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* Glassmorphism */
+  .glass-panel {
+    background: rgba(18, 20, 29, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  .glass-nav {
+    background: rgba(11, 12, 16, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .gradient-brand-text {
+    background: linear-gradient(135deg, #ff4d4d 0%, #e50914 50%, #990000 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+</style>
 </head>
-<body>
-  <header>
-    <h1>Cijene i akcije</h1>
-    <p>Najbolja IPTV ponuda za cijelu porodicu</p>
 
-    <!-- Hamburger dugme -->
-    <div class="menu-toggle" onclick="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
+<body class="bg-brand-darkBg text-slate-100 font-sans antialiased overflow-x-hidden selection:bg-brand-red selection:text-white">
+
+<canvas id="tech-bg"></canvas>
+
+<!-- Header -->
+<header class="sticky top-0 z-50 glass-nav transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="index.html" class="flex items-center gap-3 group">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-darkRed to-brand-red flex items-center justify-center shadow-neon group-hover:scale-105 transition-transform duration-300">
+        <i class="fa-solid font-bold fa-tv text-white text-xl"></i>
+      </div>
+      <div>
+        <span class="text-2xl font-extrabold tracking-wider text-white">SMARTIC<span class="text-brand-red">KANALI</span></span>
+        <span class="block text-[10px] tracking-widest text-gray-400 font-semibold uppercase -mt-1">PREMIUM IPTV TV</span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation Links -->
+    <nav class="hidden lg:flex items-center gap-6 text-sm font-medium">
+      <a href="index.html" class="text-gray-300 hover:text-white transition-colors">Početna</a>
+      <a href="cjenovnik.html" class="text-brand-red font-semibold transition-colors">Cijene i akcije</a>
+      <a href="top15.html" class="text-gray-300 hover:text-white transition-colors">Top 30</a>
+      <a href="komentari.html" class="text-gray-300 hover:text-white transition-colors">Komentari</a>
+      <a href="kako-da-gledas.html" class="text-gray-300 hover:text-white transition-colors">Kako gledati</a>
+      <a href="aplikacije.html" class="text-gray-300 hover:text-white transition-colors">Aplikacije</a>
+      <a href="onama.html" class="text-gray-300 hover:text-white transition-colors">O nama</a>
+      <a href="kontakt.html" class="text-gray-300 hover:text-white transition-colors">Kontakt</a>
+    </nav>
+
+    <!-- Header Actions -->
+    <div class="hidden sm:flex items-center gap-4">
+      <a href="https://wa.me/381694007480?text=Zdravo,%20želio%20bih%20naručiti%20IPTV%20paket" target="_blank" class="px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-brand-red to-brand-darkRed text-white hover:shadow-neon hover:scale-105 transition-all duration-300 flex items-center gap-2">
+        <i class="fa-solid fa-cart-shopping"></i> Naruči odmah
+      </a>
     </div>
-  </header>
 
-  <nav id="navbar">
-    <a href="index.html">Početna</a>
-    <a href="cjenovnik.html">Cijene i akcije</a>
-    <a href="komentari.html">Komentari</a>
-    <a href="onama.html">O nama</a>
-    <a href="tim.html">Postani dio tima</a>
-    <a href="top15.html">Top 30</a>
-    <a href="kontakt.html">Kontakt</a>
+    <!-- Mobile Menu Button -->
+    <button class="lg:hidden text-gray-300 hover:text-white p-2 rounded-lg bg-brand-accent/50 focus:outline-none" onclick="openNav()" aria-label="Otvori Meni">
+      <i class="fa-solid fa-bars text-2xl"></i>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile Overlay Navigation -->
+<div id="myNav" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl transition-all duration-500 opacity-0 pointer-events-none flex flex-col justify-between p-6">
+  <div class="flex items-center justify-between border-b border-gray-800 pb-4">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-lg bg-brand-red flex items-center justify-center text-white font-bold">
+        <i class="fa-solid fa-tv"></i>
+      </div>
+      <span class="text-xl font-bold text-white tracking-wide">SmarticKanali TV</span>
+    </div>
+    <button onclick="closeNav()" class="text-gray-400 hover:text-white p-2 text-3xl focus:outline-none">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+
+  <nav class="flex flex-col gap-3 my-auto py-6 overflow-y-auto text-center">
+    <a href="index.html" onclick="closeNav()" class="py-2.5 text-lg font-semibold text-gray-200 hover:text-white hover:bg-brand-red/10 rounded-xl transition-all">Početna</a>
+    <a href="cjenovnik.html" onclick="closeNav()" class="py-2.5 text-lg font-semibold text-brand-red hover:bg-brand-red/10 rounded-xl transition-all">Cijene i akcije</a>
+    <a href="top15.html" onclick="closeNav()" class="py-2.5 text-lg font-semibold text-gray-200 hover:text-white hover:bg-brand-red/10 rounded-xl transition-all">Top 30 Kanala</a>
+    <a href="komentari.html" onclick="closeNav()" class="py-2.5 text-lg font-semibold text-gray-200 hover:text-white hover:bg-brand-red/10 rounded-xl transition-all">Komentari korisnika</a>
+    <a href="tim.html" onclick="closeNav()" class="py-2.5 text-lg font-semibold text-gray-200 hover:text-white hover:bg-brand-red/10 rounded-xl transition-all">Postani dio tima</a>
+    <a href="onama.html" onclick="closeNav()" class="py-2.5 text-lg font-semibold text-gray-200 hover:text-white hover:bg-brand-red/10 rounded-xl transition-all">O nama</a>
+    <a href="kontakt.html" onclick="closeNav()" class="py-2.5 text-lg font-semibold text-gray-200 hover:text-white hover:bg-brand-red/10 rounded-xl transition-all">Kontakt</a>
+    <a href="placanje.html" onclick="closeNav()" class="py-2.5 text-lg font-semibold text-gray-200 hover:text-white hover:bg-brand-red/10 rounded-xl transition-all">Načini Plaćanja</a>
+    <a href="kako-da-gledas.html" onclick="closeNav()" class="py-2.5 text-lg font-semibold text-gray-200 hover:text-white hover:bg-brand-red/10 rounded-xl transition-all">Kako da gledaš</a>
+    <a href="aplikacije.html" onclick="closeNav()" class="py-2.5 text-lg font-semibold text-gray-200 hover:text-white hover:bg-brand-red/10 rounded-xl transition-all">Aplikacije za korištenje</a>
   </nav>
 
-  <div class="container">
-    <h2>Naši paketi</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Basic paket</h3>
-        <p>6.99€</p>
-        <p>750 kanala, 4.500 filmova, 500 serija</p>
-        <a class="btn" href="https://wa.me/381694007480">Kupi sada</a>
-      </div>
-      <div class="card">
-        <h3>Medium paket</h3>
-        <p>8.99€</p>
-        <p>1.120 kanala, 7.600 filmova, 650 serija</p>
-        <a class="btn" href="https://wa.me/381694007480">Kupi sada</a>
-      </div>
-      <div class="card">
-        <h3>Pro paket</h3>
-        <p>11.99€</p>
-        <p>2.100+ kanala, 45.000+ filmova, 1.350+ serija</p>
-        <a class="btn" href="https://wa.me/381694007480">Kupi sada</a>
-      </div>
+  <div class="pt-4 border-t border-gray-800 text-center">
+    <a href="https://wa.me/381694007480" target="_blank" class="w-full py-3.5 rounded-xl bg-green-600 hover:bg-green-500 text-white font-bold flex items-center justify-center gap-2 shadow-lg transition-all">
+      <i class="fa-brands fa-whatsapp text-xl"></i> Kontaktiraj WhatsApp
+    </a>
+  </div>
+</div>
+
+<!-- Hero Section -->
+<section class="relative pt-12 pb-12 md:pt-16 md:pb-16 text-center">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel text-xs font-semibold text-brand-red border border-brand-red/30 mb-6">
+      <i class="fa-solid fa-tags"></i> Transparentne i poštene cijene
     </div>
 
-    <h2 style="margin-top:40px;">Akcije</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Probni test</h3>
-        <p>24h potpuno besplatno</p>
-        <a class="btn" href="https://wa.me/381694007480">Aktiviraj</a>
+    <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight max-w-4xl mx-auto mb-4">
+      Cijene i <span class="gradient-brand-text">Akcijski Paketi</span>
+    </h1>
+
+    <p class="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto mb-8 font-normal leading-relaxed">
+      Odaberite paket koji najviše odgovara vašim potrebama. Bez skrivenih troškova, bez ugovorne obaveze – aktivacija u roku od nekoliko minuta!
+    </p>
+  </div>
+</section>
+
+<!-- Pricing Grid Section -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+  <div class="text-center mb-10">
+    <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Naši Mjesečni Paketi</h2>
+    <p class="text-xs sm:text-sm text-gray-400 mt-1">Uživajte u preko 2.100 kanala i najvećoj biblioteci filmova i serija</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+    
+    <!-- Basic Package Card -->
+    <div class="glass-panel p-8 rounded-3xl border border-gray-800 hover:border-gray-700 transition-all flex flex-col justify-between relative group hover:-translate-y-2">
+      <div>
+        <div class="flex justify-between items-center mb-4">
+          <span class="text-xs font-bold uppercase tracking-wider text-gray-400 bg-gray-800/60 px-3 py-1 rounded-full">Početni</span>
+          <i class="fa-solid fa-tv text-gray-500 text-xl"></i>
+        </div>
+        <h3 class="text-2xl font-extrabold text-white mb-2">Basic Paket</h3>
+        <p class="text-xs text-gray-400 mb-6">Savršen izbor za osnovno gledanje omiljenih kanala.</p>
+
+        <div class="mb-6 pb-6 border-b border-gray-800">
+          <span class="text-4xl font-extrabold text-white">6.99€</span>
+          <span class="text-xs text-gray-400 font-medium"> / mjesečno</span>
+        </div>
+
+        <ul class="space-y-3.5 text-sm text-gray-300 mb-8">
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-green-400 text-base"></i>
+            <span><strong>750</strong> TV Kanala</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-green-400 text-base"></i>
+            <span><strong>4.500</strong> Filmova</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-green-400 text-base"></i>
+            <span><strong>500</strong> Serija</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-green-400 text-base"></i>
+            <span>SD i HD Kvalitet slike</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-green-400 text-base"></i>
+            <span>Gledanje na 1 uređaju</span>
+          </li>
+          <li class="flex items-center gap-3 text-gray-500">
+            <i class="fa-solid fa-circle-xmark text-gray-600 text-base"></i>
+            <span>EPG TV Vodič</span>
+          </li>
+        </ul>
       </div>
-      <div class="card">
-        <h3>12 + 12 mjeseci</h3>
-        <p><span class="old-price">180€</span> <strong>140€</strong></p>
-        <p>Ušteda 40€</p>
-        <a class="btn" href="https://wa.me/381694007480">Kupi sada</a>
+
+      <a href="https://wa.me/381694007480?text=Želim%20da%20naručim%20Basic%20paket%20(6.99€)" target="_blank" class="w-full py-3.5 rounded-full glass-panel hover:bg-white/10 text-white font-bold text-sm border border-gray-700 text-center transition-all flex items-center justify-center gap-2">
+        <i class="fa-solid fa-cart-shopping"></i> Kupi odmah
+      </a>
+    </div>
+
+    <!-- Medium Package Card -->
+    <div class="glass-panel p-8 rounded-3xl border border-gray-800 hover:border-gray-700 transition-all flex flex-col justify-between relative group hover:-translate-y-2">
+      <div>
+        <div class="flex justify-between items-center mb-4">
+          <span class="text-xs font-bold uppercase tracking-wider text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full">Standard</span>
+          <i class="fa-solid fa-display text-blue-400 text-xl"></i>
+        </div>
+        <h3 class="text-2xl font-extrabold text-white mb-2">Medium Paket</h3>
+        <p class="text-xs text-gray-400 mb-6">Idealan balans broja kanala i bogate videoteke.</p>
+
+        <div class="mb-6 pb-6 border-b border-gray-800">
+          <span class="text-4xl font-extrabold text-white">8.99€</span>
+          <span class="text-xs text-gray-400 font-medium"> / mjesečno</span>
+        </div>
+
+        <ul class="space-y-3.5 text-sm text-gray-300 mb-8">
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-green-400 text-base"></i>
+            <span><strong>1.120</strong> TV Kanala</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-green-400 text-base"></i>
+            <span><strong>7.600</strong> Filmova</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-green-400 text-base"></i>
+            <span><strong>650</strong> Serija</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-green-400 text-base"></i>
+            <span>HD i Full HD Kvalitet</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-green-400 text-base"></i>
+            <span>Gledanje na 1 uređaju</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-green-400 text-base"></i>
+            <span>EPG TV Vodič uključen</span>
+          </li>
+        </ul>
       </div>
-      <div class="card">
-        <h3>Porodični paket</h3>
-        <p>Gledanje na 2 uređaja istovremeno</p>
-        <a class="btn" href="https://wa.me/381694007480">Kupi sada</a>
+
+      <a href="https://wa.me/381694007480?text=Želim%20da%20naručim%20Medium%20paket%20(8.99€)" target="_blank" class="w-full py-3.5 rounded-full glass-panel hover:bg-white/10 text-white font-bold text-sm border border-gray-700 text-center transition-all flex items-center justify-center gap-2">
+        <i class="fa-solid fa-cart-shopping"></i> Kupi odmah
+      </a>
+    </div>
+
+    <!-- Pro Package Card (Featured) -->
+    <div class="glass-panel p-8 rounded-3xl border-2 border-brand-red bg-gradient-to-b from-brand-cardBg via-brand-cardBg to-brand-red/10 shadow-neon flex flex-col justify-between relative group hover:-translate-y-2">
+      <div class="absolute -top-3.5 right-6 bg-gradient-to-r from-brand-red to-brand-darkRed text-white text-[11px] font-extrabold uppercase px-4 py-1 rounded-full shadow-md tracking-wider">
+        Najpopularnije
+      </div>
+
+      <div>
+        <div class="flex justify-between items-center mb-4">
+          <span class="text-xs font-bold uppercase tracking-wider text-brand-red bg-brand-red/10 px-3 py-1 rounded-full">Premium VIP</span>
+          <i class="fa-solid fa-crown text-yellow-400 text-xl"></i>
+        </div>
+        <h3 class="text-2xl font-extrabold text-white mb-2">Pro Paket</h3>
+        <p class="text-xs text-gray-300 mb-6">Maksimalna ponuda sa svim sportskim, filmskim i EX-YU kanalima.</p>
+
+        <div class="mb-6 pb-6 border-b border-gray-800">
+          <span class="text-4xl font-extrabold text-white">11.99€</span>
+          <span class="text-xs text-gray-300 font-medium"> / mjesečno</span>
+        </div>
+
+        <ul class="space-y-3.5 text-sm text-gray-200 mb-8">
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-brand-red text-base"></i>
+            <span><strong>2.100+</strong> TV Kanala (Svi kanali)</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-brand-red text-base"></i>
+            <span><strong>45.000+</strong> Filmova sa prevodima</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-brand-red text-base"></i>
+            <span><strong>1.350+</strong> Serija sa prevodima</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-brand-red text-base"></i>
+            <span>4K, Full HD & HD Kvalitet</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-brand-red text-base"></i>
+            <span>Vraćanje unazad do 7 dana</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-brand-red text-base"></i>
+            <span>VIP Prioritetna Podrška 24/7</span>
+          </li>
+        </ul>
+      </div>
+
+      <a href="https://wa.me/381694007480?text=Želim%20da%20naručim%20Pro%20paket%20(11.99€)" target="_blank" class="w-full py-3.5 rounded-full bg-gradient-to-r from-brand-red to-brand-darkRed text-white font-bold text-sm shadow-neon hover:scale-105 text-center transition-all flex items-center justify-center gap-2">
+        <i class="fa-solid fa-bolt"></i> Kupi odmah (Najbolji izbor)
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- Special Deals / Akcije Section -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+  <div class="text-center max-w-3xl mx-auto mb-12">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-red/20 text-brand-red text-xs font-extrabold uppercase mb-3">
+      <i class="fa-solid fa-fire text-sm"></i> Posebne Pogodnosti
+    </div>
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Aktuelne Akcije & Popusti</h2>
+    <p class="text-xs sm:text-sm text-gray-400 mt-2">Iskoristite specijalne popuste i uštedite novac uz naše dugoročne i porodične pakete!</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    
+    <!-- Promo Card 1: Probni Test -->
+    <div class="glass-panel p-8 rounded-3xl border border-gray-800 hover:border-brand-red/40 transition-all flex flex-col justify-between group">
+      <div>
+        <div class="w-12 h-12 rounded-2xl bg-brand-red/10 text-brand-red flex items-center justify-center text-xl font-bold mb-6 group-hover:bg-brand-red group-hover:text-white transition-colors">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2">Probni Test 24h</h3>
+        <p class="text-3xl font-extrabold text-green-400 mb-4">100% Besplatno</p>
+        <p class="text-xs text-gray-300 leading-relaxed mb-6">
+          Testirajte kvalitet i stabilnost naših kanala 24 sata bez ikakvih obaveza ili troškova. Uvjerite se sami zašto smo najbolji!
+        </p>
+      </div>
+      <a href="https://wa.me/381694007480?text=Zdravo,%20želio%20bih%20aktivirati%20besplatan%20test%20od%2024h" target="_blank" class="w-full py-3 rounded-full bg-green-600 hover:bg-green-500 text-white font-bold text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2">
+        <i class="fa-solid fa-bolt"></i> Aktiviraj Test 24h
+      </a>
+    </div>
+
+    <!-- Promo Card 2: 12 + 12 Mjeseci (Highlighted) -->
+    <div class="glass-panel p-8 rounded-3xl border border-brand-red/50 bg-gradient-to-br from-brand-cardBg via-brand-cardBg to-brand-red/20 transition-all flex flex-col justify-between group relative overflow-hidden shadow-xl">
+      <div class="absolute top-4 right-4 bg-yellow-500 text-black text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-md">
+        Mega Ušteda
+      </div>
+      <div>
+        <div class="w-12 h-12 rounded-2xl bg-brand-red text-white flex items-center justify-center text-xl font-bold mb-6 shadow-neon">
+          <i class="fa-solid fa-gift"></i>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-1">Paket 12 + 12 Mjeseci</h3>
+        <p class="text-xs text-brand-red font-semibold mb-4">Platite 12 mjeseci, gledajte 24 mjeseca!</p>
+        
+        <div class="mb-4">
+          <span class="text-gray-400 text-base line-through mr-2">180€</span>
+          <span class="text-4xl font-extrabold text-white">140€</span>
+        </div>
+        <div class="inline-block px-3 py-1 rounded-lg bg-green-500/20 text-green-400 text-xs font-bold mb-6">
+          <i class="fa-solid fa-piggy-bank"></i> Ušteda čak 40€
+        </div>
+        <p class="text-xs text-gray-300 leading-relaxed mb-6">
+          Plaćanjem dvogodišnje pretplate ostvarujete najveći popust i potpunu mirnoću naredne 2 godine.
+        </p>
+      </div>
+      <a href="https://wa.me/381694007480?text=Želim%20da%20iskoristim%20akciju%2012%2B12%20mjeseci%20za%20140€" target="_blank" class="w-full py-3.5 rounded-full bg-gradient-to-r from-brand-red to-brand-darkRed text-white font-bold text-xs uppercase tracking-wider text-center shadow-neon hover:scale-105 transition-all flex items-center justify-center gap-2">
+        <i class="fa-solid fa-cart-shopping"></i> Kupi Akciju (140€)
+      </a>
+    </div>
+
+    <!-- Promo Card 3: Porodični Paket -->
+    <div class="glass-panel p-8 rounded-3xl border border-gray-800 hover:border-brand-red/40 transition-all flex flex-col justify-between group">
+      <div>
+        <div class="w-12 h-12 rounded-2xl bg-brand-red/10 text-brand-red flex items-center justify-center text-xl font-bold mb-6 group-hover:bg-brand-red group-hover:text-white transition-colors">
+          <i class="fa-solid fa-house-user"></i>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2">Porodični Paket</h3>
+        <p class="text-3xl font-extrabold text-blue-400 mb-4">2 Uređaja</p>
+        <p class="text-xs text-gray-300 leading-relaxed mb-6">
+          Omogućava istovremeno gledanje različitih kanala na dva televizora ili uređaja u istom domaćinstvu po sniženoj cijeni.
+        </p>
+      </div>
+      <a href="https://wa.me/381694007480?text=Ineresuje%20me%20Porodični%20paket%20za%202%20uređaja" target="_blank" class="w-full py-3 rounded-full glass-panel hover:bg-white/10 text-white font-bold text-xs uppercase tracking-wider text-center border border-gray-700 transition-all flex items-center justify-center gap-2">
+        <i class="fa-solid fa-users"></i> Saznaj više
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- Guarantee / Feature Highlights Banner -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+  <div class="glass-panel rounded-3xl p-8 sm:p-10 border border-gray-800 bg-gradient-to-r from-brand-cardBg to-brand-accent/50">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-brand-red/10 text-brand-red flex items-center justify-center text-xl shrink-0">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-white text-sm">Instant Aktivacija</h4>
+          <p class="text-xs text-gray-400">Dobijte podatke za manje od 10 minuta.</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-brand-red/10 text-brand-red flex items-center justify-center text-xl shrink-0">
+          <i class="fa-solid fa-file-shield"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-white text-sm">Bez Ugovora</h4>
+          <p class="text-xs text-gray-400">Plaćate po želji, bez trajnih obaveza.</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-brand-red/10 text-brand-red flex items-center justify-center text-xl shrink-0">
+          <i class="fa-solid fa-credit-card"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-white text-sm">Sigurno Plaćanje</h4>
+          <p class="text-xs text-gray-400">PayPal, Banka, Crypto, Western Union.</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-brand-red/10 text-brand-red flex items-center justify-center text-xl shrink-0">
+          <i class="fa-solid fa-headset"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-white text-sm">Podrška 24/7</h4>
+          <p class="text-xs text-gray-400">Tu smo na WhatsApp-u u svakom trenutku.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-black/90 border-t border-gray-800 pt-16 pb-12 text-gray-400">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+      
+      <!-- Col 1 -->
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-9 h-9 rounded-xl bg-brand-red flex items-center justify-center text-white font-bold">
+            <i class="fa-solid fa-tv"></i>
+          </div>
+          <span class="text-2xl font-extrabold text-white">SmarticKanali TV</span>
+        </div>
+        <p class="text-sm text-gray-400 max-w-sm mb-6 leading-relaxed">
+          Vodeći IPTV provajder na Balkanu. Preko 9 godina tradicije, vrhunski kvalitet slike i neprikosnovena korisnička podrška 24/7.
+        </p>
+        <p class="text-xs text-gray-500">&copy; 2026 SmarticKanali TV. Sva prava zadržana.</p>
+      </div>
+
+      <!-- Col 2 -->
+      <div>
+        <h4 class="text-white font-bold text-base mb-4 border-b border-brand-red/40 pb-2 inline-block">Navigacija</h4>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="index.html" class="hover:text-brand-red transition-colors">Početna</a></li>
+          <li><a href="cjenovnik.html" class="hover:text-brand-red transition-colors">Cijene i Akcije</a></li>
+          <li><a href="top15.html" class="hover:text-brand-red transition-colors">Top 30 Kanala</a></li>
+          <li><a href="komentari.html" class="hover:text-brand-red transition-colors">Komentari</a></li>
+          <li><a href="kako-da-gledas.html" class="hover:text-brand-red transition-colors">Kako gledati</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3 -->
+      <div>
+        <h4 class="text-white font-bold text-base mb-4 border-b border-brand-red/40 pb-2 inline-block">Korisni linkovi</h4>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="aplikacije.html" class="hover:text-brand-red transition-colors">Aplikacije</a></li>
+          <li><a href="tim.html" class="hover:text-brand-red transition-colors">Postani dio tima</a></li>
+          <li><a href="onama.html" class="hover:text-brand-red transition-colors">O nama</a></li>
+          <li><a href="placanje.html" class="hover:text-brand-red transition-colors">Načini Plaćanja</a></li>
+          <li><a href="kontakt.html" class="hover:text-brand-red transition-colors">Kontakt Podrška</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom Line -->
+    <div class="border-t border-gray-800/80 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+      <p>Kontakt WhatsApp: <a href="https://wa.me/381694007480" class="text-white hover:text-brand-red font-semibold">+381 69 4007480</a></p>
+      <div class="flex gap-4">
+        <a href="kontakt.html" class="hover:text-white">Podrška</a>
+        <a href="placanje.html" class="hover:text-white">Sigurno plaćanje</a>
       </div>
     </div>
   </div>
+</footer>
 
-  <footer>
-    <p>&copy; 2025 SmarticKanali TV</p>
-    <p>WhatsApp: <a href="https://wa.me/381694007480">+381 69 4007480</a></p>
-  </footer>
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/381694007480" target="_blank" aria-label="Kontaktirajte nas na WhatsApp" class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-5 rounded-full shadow-[0_0_20px_rgba(37,211,102,0.5)] flex items-center gap-3 hover:scale-110 transition-all duration-300 group">
+  <i class="fa-brands fa-whatsapp text-2xl group-hover:rotate-12 transition-transform"></i>
+  <span class="text-sm font-extrabold hidden sm:inline">WhatsApp Podrška</span>
+</a>
 
-  <script>
-    function toggleMenu() {
-      document.getElementById("navbar").classList.toggle("active");
+<script>
+// Mobile Navigation
+function openNav() {
+  const nav = document.getElementById('myNav');
+  nav.classList.remove('opacity-0', 'pointer-events-none');
+  nav.classList.add('opacity-100', 'pointer-events-auto');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeNav() {
+  const nav = document.getElementById('myNav');
+  nav.classList.add('opacity-0', 'pointer-events-none');
+  nav.classList.remove('opacity-100', 'pointer-events-auto');
+  document.body.style.overflow = 'auto';
+}
+
+// Particle Background Animation
+const canvas = document.getElementById('tech-bg');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+let particles = [];
+const particleCount = Math.min(Math.floor(window.innerWidth / 15), 70);
+
+for (let i = 0; i < particleCount; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 0.6,
+    vy: (Math.random() - 0.5) * 0.6,
+    radius: Math.random() * 2 + 1
+  });
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  particles.forEach((p, index) => {
+    p.x += p.vx;
+    p.y += p.vy;
+
+    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+    ctx.fillStyle = "rgba(229, 9, 20, 0.6)";
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    ctx.fill();
+
+    for (let j = index + 1; j < particles.length; j++) {
+      const p2 = particles[j];
+      const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+      if (dist < 120) {
+        ctx.strokeStyle = `rgba(229, 9, 20, ${0.2 * (1 - dist / 120)})`;
+        ctx.lineWidth = 0.6;
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+      }
     }
-  </script>
+  });
+
+  requestAnimationFrame(animateParticles);
+}
+
+window.onload = function() {
+  animateParticles();
+};
+</script>
+
 </body>
 </html>
